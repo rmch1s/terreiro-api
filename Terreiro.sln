@@ -1,0 +1,61 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35521.163 d17.12
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Terreiro.Domain", "Terreiro.Domain\Terreiro.Domain.csproj", "{7C94625F-C9D3-425D-B951-A68D2EF2199F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Terreiro.Application", "Terreiro.Application\Terreiro.Application.csproj", "{952F80B4-64F6-481E-8079-4BC65F798E24}"
+	ProjectSection(ProjectDependencies) = postProject
+		{7C94625F-C9D3-425D-B951-A68D2EF2199F} = {7C94625F-C9D3-425D-B951-A68D2EF2199F}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Terreiro.Persistence", "Terreiro.Persistence\Terreiro.Persistence.csproj", "{8E6A2FCE-CE5B-495D-9142-EE711F8AF3ED}"
+	ProjectSection(ProjectDependencies) = postProject
+		{952F80B4-64F6-481E-8079-4BC65F798E24} = {952F80B4-64F6-481E-8079-4BC65F798E24}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Terreiro.Presentation", "Terreiro.Presentation\Terreiro.Presentation.csproj", "{AFFCB6E3-651D-4759-AA9B-5896628FCD53}"
+	ProjectSection(ProjectDependencies) = postProject
+		{8E6A2FCE-CE5B-495D-9142-EE711F8AF3ED} = {8E6A2FCE-CE5B-495D-9142-EE711F8AF3ED}
+		{952F80B4-64F6-481E-8079-4BC65F798E24} = {952F80B4-64F6-481E-8079-4BC65F798E24}
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{A0D04F55-B645-4C35-8A9A-E639F49819E5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Terreiro.Tests", "Terreiro.Tests\Terreiro.Tests.csproj", "{65374456-36A9-42FA-8A2B-A50BC8F73B85}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7C94625F-C9D3-425D-B951-A68D2EF2199F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C94625F-C9D3-425D-B951-A68D2EF2199F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C94625F-C9D3-425D-B951-A68D2EF2199F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C94625F-C9D3-425D-B951-A68D2EF2199F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{952F80B4-64F6-481E-8079-4BC65F798E24}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{952F80B4-64F6-481E-8079-4BC65F798E24}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{952F80B4-64F6-481E-8079-4BC65F798E24}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{952F80B4-64F6-481E-8079-4BC65F798E24}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8E6A2FCE-CE5B-495D-9142-EE711F8AF3ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8E6A2FCE-CE5B-495D-9142-EE711F8AF3ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8E6A2FCE-CE5B-495D-9142-EE711F8AF3ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8E6A2FCE-CE5B-495D-9142-EE711F8AF3ED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AFFCB6E3-651D-4759-AA9B-5896628FCD53}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AFFCB6E3-651D-4759-AA9B-5896628FCD53}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AFFCB6E3-651D-4759-AA9B-5896628FCD53}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AFFCB6E3-651D-4759-AA9B-5896628FCD53}.Release|Any CPU.Build.0 = Release|Any CPU
+		{65374456-36A9-42FA-8A2B-A50BC8F73B85}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{65374456-36A9-42FA-8A2B-A50BC8F73B85}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{65374456-36A9-42FA-8A2B-A50BC8F73B85}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{65374456-36A9-42FA-8A2B-A50BC8F73B85}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{65374456-36A9-42FA-8A2B-A50BC8F73B85} = {A0D04F55-B645-4C35-8A9A-E639F49819E5}
+	EndGlobalSection
+EndGlobal

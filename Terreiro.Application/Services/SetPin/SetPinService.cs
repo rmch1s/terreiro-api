@@ -1,0 +1,21 @@
+﻿using Terreiro.Application.Exceptions;
+using Terreiro.Application.Resources;
+using Terreiro.Domain.Entities;
+using Terreiro.Domain.Execptions;
+
+namespace Terreiro.Application.Services.SetPin;
+
+public class SetPinService : ISetPinService
+{
+    public void SetPin(User user, string? oldPin, string newPin)
+    {
+        try
+        {
+            user.SetPin(oldPin, newPin);
+        }
+        catch (WrongPinExeption)
+        {
+            throw new BadRequestExeption(TerreiroResource.WRONG_PIN);
+        }
+    }
+}

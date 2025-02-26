@@ -1,0 +1,67 @@
+## Ignore arquivos gerados pelo .NET e Visual Studio
+
+# Binários e compilação
+bin/
+obj/
+out/
+debug/
+release/
+
+# Configurações do usuário e arquivos do Visual Studio
+.vscode/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+*.vs/
+
+# Logs, pacotes e dependências
+logs/
+*.log
+nuget.exe
+packages/
+node_modules/
+!node_modules/.gitkeep
+
+# Arquivos temporários e cache
+.env
+.env.*
+!.env.example
+.vs/
+.idea/
+Thumbs.db
+*.tmp
+*.cache
+*.pdb
+*.pid
+*.swp
+*.swo
+*.seed
+*.bak
+*.orig
+*.rej
+
+# Configurações locais do sistema
+appsettings.Local.json
+appsettings.Development.json
+secrets.json
+*.csproj.user
+
+# Publicação e deployment
+publish/
+wwwroot/dist/
+wwwroot/node_modules/
+wwwroot/lib/
+wwwroot/css/
+wwwroot/js/
+
+# Certificados SSL locais
+*.pfx
+*.p12
+
+# Docker e contêineres
+.dockerignore
+Dockerfile
+docker-compose.override.yml
+*.ps1
+docker-compose.yaml
