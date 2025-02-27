@@ -6,5 +6,6 @@ public record EventDetailsDto(
     string Name,
     string? Description,
     Period Period,
-    UserDto[] Users
+    UserDto[] Users,
+    EventItemDto[] Items
 );

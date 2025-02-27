@@ -10,4 +10,5 @@ public interface IRepository<T> where T : Entity
     Task<int> Add(T entity);
     Task<int> Update(T entity);
     Task<int> Delete(T entity);
+    Task<int> Add(IEnumerable<T> entities);
 }

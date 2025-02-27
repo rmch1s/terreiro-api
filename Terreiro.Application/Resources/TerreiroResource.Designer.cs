@@ -70,6 +70,15 @@ namespace Terreiro.Application.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Não foi encontrado o evento item de id {0}..
+        /// </summary>
+        public static string EVENT_ITEM_NOT_FOUND_ID {
+            get {
+                return ResourceManager.GetString("EVENT_ITEM_NOT_FOUND_ID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Não foi encontrado o evento de id {0}..
         /// </summary>
         public static string EVENT_NOT_FOUND_ID {

@@ -31,6 +31,13 @@ public abstract class Repository<T>(TerreiroDbContext db) where T : Entity
         return await db.SaveChangesAsync();
     }
 
+    public async Task<int> Add(IEnumerable<T> entities)
+    {
+        await dbSet.AddRangeAsync(entities);
+
+        return await db.SaveChangesAsync();
+    }
+
     public async Task<int> Update(T entity)
     {
         dbSet.Update(entity);

@@ -23,7 +23,12 @@ public class EventController(IEventRepository eventRepository, IMapper mapper) :
     [HttpGet("{id}")]
     public async Task<IActionResult> GetById(int id)
     {
-        var @event = await eventRepository.Get(id, e => e.Users.Where(u => !u.DeletedAt.HasValue));
+        var @event = await eventRepository.Get(
+            id,
+            e => e.Users.Where(u => !u.DeletedAt.HasValue),
+            e => e.Items.Where(ei => !ei.DeletedAt.HasValue)
+        );
+
         return @event is null ?
             NotFound(TerreiroResource.EVENT_NOT_FOUND_ID.InsertParams(id)) :
             Ok(mapper.Map<EventDetailsDto>(@event));

@@ -120,6 +120,9 @@
   <data name="DATA_ERROR" xml:space="preserve">
     <value>Não foi possível salvar as alterações no banco.</value>
   </data>
+  <data name="EVENT_ITEM_NOT_FOUND_ID" xml:space="preserve">
+    <value>Não foi encontrado o evento item de id {0}.</value>
+  </data>
   <data name="EVENT_NOT_FOUND_ID" xml:space="preserve">
     <value>Não foi encontrado o evento de id {0}.</value>
     <comment>0 - número id</comment>

@@ -19,5 +19,6 @@ internal class MapperProfile : Profile
         CreateMap<EventDetailsDto, Event>().ReverseMap();
 
         CreateMap<UpsertEventItemRequest, EventItem>().ReverseMap();
+        CreateMap<EventItemDto, EventItem>().ReverseMap();
     }
 }
