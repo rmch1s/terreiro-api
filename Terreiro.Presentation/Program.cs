@@ -4,6 +4,7 @@ using System.Reflection;
 using Terreiro.Persistence.Data;
 using Terreiro.Presentation.Configuration;
 using Terreiro.Presentation.Filter;
+using Terreiro.Presentation.Middlewares;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
@@ -33,6 +34,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseMiddleware<ExceptionMiddleware>();
 
 app.UseHttpsRedirection();
 

@@ -34,11 +34,11 @@ public class ResponseWrapperFilter : IResultFilter
         else if (context.Result is ObjectResult objectResult)
         {
             var result = objectResult.Value;
-            objectResult.Value = new BaseRequestResponse<object?>(result, false, []);
+            objectResult.Value = new BaseRequestResponse<object>(result, false, []);
         }
         else
         {
-            context.Result = new ObjectResult(new BaseRequestResponse<object?>(null, false, []));
+            context.Result = new ObjectResult(new BaseRequestResponse<object>(null, false, []));
         }
     }
 }

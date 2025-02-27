@@ -13,7 +13,7 @@ public class SetPinService : ISetPinService
         {
             user.SetPin(oldPin, newPin);
         }
-        catch (WrongPinExeption)
+        catch (WrongPinException)
         {
             throw new BadRequestExeption(TerreiroResource.WRONG_PIN);
         }

@@ -29,7 +29,7 @@ public class User : Entity
     public void SetPin(string? oldPin, string newPin)
     {
         if (PIN != oldPin)
-            throw new WrongPinExeption();
+            throw new WrongPinException();
 
         PIN = newPin;
     }
