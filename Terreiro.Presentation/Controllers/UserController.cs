@@ -34,6 +34,14 @@ public class UserController(
             Ok(mapper.Map<UserDetailsDto>(user));
     }
 
+    [HttpPost]
+    public async Task<IActionResult> Create([FromBody] UpsertUserRequest request)
+    {
+        var user = new User(request.Name, request.CPF, request.Cellphone);
+        var rowsAffected = await userRepository.Add(user);
+        return rowsAffected is 0 ? UnprocessableEntity(TerreiroResource.DATA_ERROR) : Created();
+    }
+
     [HttpDelete("{id}")]
     public async Task<IActionResult> Delete(int id)
     {
@@ -42,14 +50,6 @@ public class UserController(
 
         var rowsAffected = await userRepository.Delete(user);
         return rowsAffected is 0 ? UnprocessableEntity(TerreiroResource.DATA_ERROR) : NoContent();
-    }
-
-    [HttpPost]
-    public async Task<IActionResult> Create([FromBody] UpsertUserRequest request)
-    {
-        var user = new User(request.Name, request.CPF, request.Cellphone);
-        var rowsAffected = await userRepository.Add(user);
-        return rowsAffected is 0 ? UnprocessableEntity(TerreiroResource.DATA_ERROR) : Created();
     }
 
     [HttpPut("{id}")]

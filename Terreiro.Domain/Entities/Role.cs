@@ -8,6 +8,9 @@ public class Role(string name, string? description = null) : Entity
     public ICollection<UserRole> UserRoles { get; } = [];
     public ICollection<User> Users { get; } = [];
 
-    public void SetName(string name) => Name = name;
-    public void SetDescription(string description) => Description = description;
+    public void Update(string name, string? description)
+    {
+        Name = name;
+        Description = description;
+    }
 }

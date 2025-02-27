@@ -15,26 +15,23 @@ public class ResponseWrapperFilter : IResultFilter
     {
         if (context.Result is ObjectResult objectResult)
         {
-            if (objectResult.Value is BaseRequestResponse<object>)
-                return;
-
             objectResult.Value = objectResult switch
             {
-                NotFoundObjectResult notFound => WrapResponse(notFound.Value),
+                NotFoundObjectResult notFound => WrapResponse(notFound.Value, true),
                 BadRequestObjectResult badRequest => WrapBadRequestResponse(badRequest.Value),
-                UnprocessableEntityObjectResult unprocessable => WrapResponse(unprocessable.Value),
+                UnprocessableEntityObjectResult unprocessable => WrapResponse(unprocessable.Value, true),
                 _ => new BaseRequestResponse<object>(
                     objectResult.Value,
-                    objectResult.StatusCode >= 200 && objectResult.StatusCode <= 300,
+                    objectResult.StatusCode >= 300,
                     []
                 )
             };
         }
         else
-            context.Result = new ObjectResult(new BaseRequestResponse<object>(null, false, []));
+            context.Result = new ObjectResult(WrapResponse(null, false));
     }
 
-    private static BaseRequestResponse<object> WrapResponse(object? value)
+    private static BaseRequestResponse<object> WrapResponse(object? value, bool error)
     {
         string[] errorMessages = value switch
         {
@@ -42,7 +39,7 @@ public class ResponseWrapperFilter : IResultFilter
             _ => []
         };
 
-        return new BaseRequestResponse<object>(null, true, errorMessages);
+        return new BaseRequestResponse<object>(null, error, errorMessages);
     }
 
     private static BaseRequestResponse<object> WrapBadRequestResponse(object? value)

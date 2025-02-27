@@ -13,6 +13,7 @@ internal class MapperProfile : Profile
         CreateMap<UserDetailsDto, User>().ReverseMap();
 
         CreateMap<RoleDto, Role>().ReverseMap();
+        CreateMap<RoleDetailsDto, Role>().ReverseMap();
 
         CreateMap<EventDto, Event>().ReverseMap();
         CreateMap<EventDetailsDto, Event>().ReverseMap();

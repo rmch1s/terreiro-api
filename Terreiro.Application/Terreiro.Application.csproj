@@ -26,7 +26,7 @@
 
   <ItemGroup>
     <EmbeddedResource Update="Resources\TerreiroResource.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>TerreiroResource.Designer.cs</LastGenOutput>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>

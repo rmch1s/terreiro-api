@@ -29,7 +29,7 @@ namespace Terreiro.Application.Resources {
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        public TerreiroResource() {
+        internal TerreiroResource() {
         }
         
         /// <summary>
@@ -129,6 +129,15 @@ namespace Terreiro.Application.Resources {
         public static string INTERNAL_SERVER_ERROR_MESSAGE {
             get {
                 return ResourceManager.GetString("INTERNAL_SERVER_ERROR_MESSAGE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Não foi encontrado a role de id {0}..
+        /// </summary>
+        public static string ROLE_NOT_FOUND_ID {
+            get {
+                return ResourceManager.GetString("ROLE_NOT_FOUND_ID", resourceCulture);
             }
         }
         
