@@ -13,32 +13,47 @@ public class ResponseWrapperFilter : IResultFilter
 
     public void OnResultExecuting(ResultExecutingContext context)
     {
-        if (context.Result is NotFoundObjectResult notFoundResult)
+        if (context.Result is ObjectResult objectResult)
         {
-            string[]? errorMessages = notFoundResult.Value is not string errorMessage ? [] : [errorMessage];
-            notFoundResult.Value = new BaseRequestResponse<object>(null, true, errorMessages);
-        }
-        else if (context.Result is BadRequestObjectResult badRequestObjectResult)
-        {
-            if (badRequestObjectResult?.Value is BaseRequestResponse<object>)
+            if (objectResult.Value is BaseRequestResponse<object>)
                 return;
 
-            string[]? errorMessages = badRequestObjectResult!.Value is not string errorMessage ? [] : [errorMessage];
-            badRequestObjectResult.Value = new BaseRequestResponse<object>(null, true, errorMessages);
-        }
-        else if (context.Result is UnprocessableEntityObjectResult unprocessableEntityObjectResult)
-        {
-            string[]? errorMessages = unprocessableEntityObjectResult!.Value is not string errorMessage ? [] : [errorMessage];
-            unprocessableEntityObjectResult.Value = new BaseRequestResponse<object>(null, true, errorMessages);
-        }
-        else if (context.Result is ObjectResult objectResult)
-        {
-            var result = objectResult.Value;
-            objectResult.Value = new BaseRequestResponse<object>(result, false, []);
+            objectResult.Value = objectResult switch
+            {
+                NotFoundObjectResult notFound => WrapResponse(notFound.Value),
+                BadRequestObjectResult badRequest => WrapBadRequestResponse(badRequest.Value),
+                UnprocessableEntityObjectResult unprocessable => WrapResponse(unprocessable.Value),
+                _ => new BaseRequestResponse<object>(
+                    objectResult.Value,
+                    objectResult.StatusCode >= 200 && objectResult.StatusCode <= 300,
+                    []
+                )
+            };
         }
         else
-        {
             context.Result = new ObjectResult(new BaseRequestResponse<object>(null, false, []));
-        }
+    }
+
+    private static BaseRequestResponse<object> WrapResponse(object? value)
+    {
+        string[] errorMessages = value switch
+        {
+            string message => [message],
+            _ => []
+        };
+
+        return new BaseRequestResponse<object>(null, true, errorMessages);
+    }
+
+    private static BaseRequestResponse<object> WrapBadRequestResponse(object? value)
+    {
+        string[] errorMessages = value switch
+        {
+            ValidationProblemDetails validation => validation.Errors.SelectMany(x => x.Value).ToArray(),
+            string message => [message],
+            _ => []
+        };
+
+        return new BaseRequestResponse<object>(null, true, errorMessages);
     }
 }

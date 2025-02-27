@@ -28,8 +28,10 @@ public class UserController(
     [HttpGet("{id}")]
     public async Task<IActionResult> GetById(int id)
     {
-        var user = await userRepository.Get(id);
-        return user is null ? NotFound(TerreiroResource.USER_NOT_FOUND_ID.InsertParams(id)) : Ok(mapper.Map<UserDto>(user));
+        var user = await userRepository.Get(id, u => u.Roles.Where(r => !r.DeletedAt.HasValue));
+        return user is null ?
+            NotFound(TerreiroResource.USER_NOT_FOUND_ID.InsertParams(id)) :
+            Ok(mapper.Map<UserDetailsDto>(user));
     }
 
     [HttpDelete("{id}")]
@@ -59,7 +61,9 @@ public class UserController(
         user.Update(request.Name, request.CPF, request.Cellphone);
 
         var rowsAffected = await userRepository.Update(user);
-        return rowsAffected is 0 ? UnprocessableEntity(TerreiroResource.DATA_ERROR) : Ok(mapper.Map<UserDto>(user));
+        return rowsAffected is 0 ?
+            UnprocessableEntity(TerreiroResource.DATA_ERROR) :
+            Ok(mapper.Map<UserDto>(user));
     }
 
     [HttpPatch("{id}/pin")]

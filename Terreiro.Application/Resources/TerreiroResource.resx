@@ -120,16 +120,32 @@
   <data name="DATA_ERROR" xml:space="preserve">
     <value>Não foi possível salvar as alterações no banco.</value>
   </data>
+  <data name="EVENT_NOT_FOUND_ID" xml:space="preserve">
+    <value>Não foi encontrado o evento de id {0}.</value>
+    <comment>0 - número id</comment>
+  </data>
   <data name="FIELD_BETWEEN_LENGTH" xml:space="preserve">
-    <value>Campo {0} deve ter entre {1} e {2} caracteres.</value>
+    <value>{0} deve ter entre {1} e {2} caracteres.</value>
     <comment>0 - Nome campo, 1 - número min caractéres, 2- número max caractéres</comment>
   </data>
+  <data name="FIELD_EMPTY" xml:space="preserve">
+    <value>{0} não pode ser vazio.</value>
+    <comment>0 - Nome campo</comment>
+  </data>
+  <data name="FIELD_GREATER_THAN" xml:space="preserve">
+    <value>{0} deve ser maior que {1}.</value>
+    <comment>0 - Nome campo, 1 - valor comparado</comment>
+  </data>
   <data name="FIELD_MUST_BE_LENGTH" xml:space="preserve">
-    <value>Campo {0} deve ter {1} caracteres</value>
+    <value>{0} deve ter {1} caracteres</value>
     <comment>0 - Nome campo, 1 - número caractéres</comment>
   </data>
   <data name="FIELD_ONLY_NUMBERS" xml:space="preserve">
-    <value>Campo {0} deve ser composto apenas por números</value>
+    <value>{0} deve ser composto apenas por números</value>
+    <comment>0 - Nome campo</comment>
+  </data>
+  <data name="INTERNAL_SERVER_ERROR_MESSAGE" xml:space="preserve">
+    <value>Ocorreu um erro interno no servidor, para mais detalhes contate o suporte.</value>
   </data>
   <data name="USER_NOT_FOUND_ID" xml:space="preserve">
     <value>Não foi encontrado o usuário de id {0}.</value>

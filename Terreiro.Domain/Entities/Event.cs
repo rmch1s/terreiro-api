@@ -6,7 +6,7 @@ public class Event : Entity
 {
     private Event() { }
 
-    public Event(string name, Period period, List<EventItem> items, string? description = null)
+    public Event(string name, Period period, EventItem[] items, string? description)
     {
         Name = name;
         Period = period;
@@ -21,4 +21,11 @@ public class Event : Entity
     public ICollection<EventItem> Items { get; } = [];
     public ICollection<UserEvent> UserEvents { get; } = [];
     public ICollection<User> Users { get; } = [];
+
+    public void Update(string name, Period period, string? description)
+    {
+        Name = name;
+        Period = period;
+        Description = description;
+    }
 }

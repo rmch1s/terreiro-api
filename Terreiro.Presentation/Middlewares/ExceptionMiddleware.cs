@@ -2,6 +2,7 @@
 using System.Text.Json;
 using Terreiro.Application.Exceptions;
 using Terreiro.Application.Models;
+using Terreiro.Application.Resources;
 
 namespace Terreiro.Presentation.Middlewares;
 
@@ -21,18 +22,19 @@ public class ExceptionMiddleware(RequestDelegate next)
 
     private static Task HandleExceptionAsync(HttpContext context, Exception exception)
     {
-        var response = context.Response;
-        response.ContentType = "application/json";
+        context.Response.ContentType = "application/json";
 
-        response.StatusCode = exception switch
+        var (statusCode, message) = exception switch
         {
-            BadRequestExeption => (int)HttpStatusCode.BadRequest,
-            UnauthorizedAccessException => (int)HttpStatusCode.Unauthorized,
-            _ => (int)HttpStatusCode.InternalServerError
+            BadRequestExeption => ((int)HttpStatusCode.BadRequest, exception.Message),
+            UnauthorizedAccessException => ((int)HttpStatusCode.Unauthorized, exception.Message),
+            _ => ((int)HttpStatusCode.InternalServerError, TerreiroResource.INTERNAL_SERVER_ERROR_MESSAGE)
         };
 
-        var result = JsonSerializer.Serialize(new BaseRequestResponse<object>(null, true, [exception.Message]));
-        return response.WriteAsync(result);
+        context.Response.StatusCode = statusCode;
+        var result = JsonSerializer.Serialize(new BaseRequestResponse<object>(null, true, [message]));
+
+        return context.Response.WriteAsync(result);
     }
 }
 

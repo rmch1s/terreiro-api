@@ -1,4 +1,5 @@
 using FluentValidation;
+using FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 using Terreiro.Persistence.Data;
@@ -17,10 +18,10 @@ builder.Services.AddApplicationDependencies();
 
 builder.Services.AddControllers(options =>
 {
-    options.Filters.Add<AsyncAutoValidation>();
     options.Filters.Add<ResponseWrapperFilter>();
 });
 
+builder.Services.AddFluentValidationAutoValidation();
 builder.Services.AddValidatorsFromAssembly(Assembly.Load("Terreiro.Application"));
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 

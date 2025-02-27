@@ -28,6 +28,6 @@ public class UserRoleMapping : IEntityTypeConfiguration<UserRole>
 
         builder.Property(p => p.UserId)
             .HasColumnName("role_id")
-            .IsRequired();
+        .IsRequired();
     }
 }

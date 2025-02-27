@@ -305,7 +305,7 @@ namespace Terreiro.Persistence.Migrations
 
                             b1.HasKey("EventId");
 
-                            b1.ToTable("events");
+                            b1.ToTable("events", (string)null);
 
                             b1.WithOwner()
                                 .HasForeignKey("EventId");
@@ -347,7 +347,7 @@ namespace Terreiro.Persistence.Migrations
 
                             b1.HasKey("UserId");
 
-                            b1.ToTable("users");
+                            b1.ToTable("users", (string)null);
 
                             b1.WithOwner()
                                 .HasForeignKey("UserId");

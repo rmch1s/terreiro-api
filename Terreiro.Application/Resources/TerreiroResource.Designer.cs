@@ -70,7 +70,16 @@ namespace Terreiro.Application.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Campo {0} deve ter entre {1} e {2} caracteres..
+        ///   Looks up a localized string similar to Não foi encontrado o evento de id {0}..
+        /// </summary>
+        public static string EVENT_NOT_FOUND_ID {
+            get {
+                return ResourceManager.GetString("EVENT_NOT_FOUND_ID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} deve ter entre {1} e {2} caracteres..
         /// </summary>
         public static string FIELD_BETWEEN_LENGTH {
             get {
@@ -79,7 +88,25 @@ namespace Terreiro.Application.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Campo {0} deve ter {1} caracteres.
+        ///   Looks up a localized string similar to {0} não pode ser vazio..
+        /// </summary>
+        public static string FIELD_EMPTY {
+            get {
+                return ResourceManager.GetString("FIELD_EMPTY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} deve ser maior que {1}..
+        /// </summary>
+        public static string FIELD_GREATER_THAN {
+            get {
+                return ResourceManager.GetString("FIELD_GREATER_THAN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} deve ter {1} caracteres.
         /// </summary>
         public static string FIELD_MUST_BE_LENGTH {
             get {
@@ -88,11 +115,20 @@ namespace Terreiro.Application.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Campo {0} deve ser composto apenas por números.
+        ///   Looks up a localized string similar to {0} deve ser composto apenas por números.
         /// </summary>
         public static string FIELD_ONLY_NUMBERS {
             get {
                 return ResourceManager.GetString("FIELD_ONLY_NUMBERS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ocorreu um erro interno no servidor, para mais detalhes contate o suporte..
+        /// </summary>
+        public static string INTERNAL_SERVER_ERROR_MESSAGE {
+            get {
+                return ResourceManager.GetString("INTERNAL_SERVER_ERROR_MESSAGE", resourceCulture);
             }
         }
         

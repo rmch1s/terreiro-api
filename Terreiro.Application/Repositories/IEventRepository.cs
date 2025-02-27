@@ -2,4 +2,7 @@
 
 namespace Terreiro.Application.Repositories;
 
-public interface IEventRepository : IRepository<Event>;
+public interface IEventRepository : IRepository<Event>
+{
+    Task<IEnumerable<Event>> Get(DateTime? startDate, DateTime? endDate);
+}
