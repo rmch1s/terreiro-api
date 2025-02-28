@@ -127,6 +127,10 @@
     <value>Não foi encontrado o evento de id {0}.</value>
     <comment>0 - número id</comment>
   </data>
+  <data name="EXISTING_ROLES_ERROR" xml:space="preserve">
+    <value>O usuário ja possuí as seguintes roles: {0}.</value>
+    <comment>0 - nome das roles</comment>
+  </data>
   <data name="FIELD_BETWEEN_LENGTH" xml:space="preserve">
     <value>{0} deve ter entre {1} e {2} caracteres.</value>
     <comment>0 - Nome campo, 1 - número min caractéres, 2- número max caractéres</comment>

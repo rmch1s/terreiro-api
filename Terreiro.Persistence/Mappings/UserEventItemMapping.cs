@@ -10,19 +10,7 @@ public class UserEventItemMapping : IEntityTypeConfiguration<UserEventItem>
     {
         builder.ToTable("user_event_items");
 
-        builder.HasKey(t => t.Id);
-
-        builder.Property(p => p.Id)
-            .HasColumnName("id")
-            .IsRequired()
-            .UseSequence();
-
-        builder.Property(p => p.CreatedAt)
-            .HasColumnName("created_at")
-            .IsRequired();
-
-        builder.Property(p => p.DeletedAt)
-            .HasColumnName("deleted_at");
+        builder.HasKey(p => new { p.UserId, p.EventItemId });
 
         builder.Property(p => p.UserId)
             .HasColumnName("user_id")

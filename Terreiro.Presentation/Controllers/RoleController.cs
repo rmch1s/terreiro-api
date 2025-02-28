@@ -9,7 +9,7 @@ using Terreiro.Domain.Entities;
 
 namespace Terreiro.Presentation.Controllers;
 
-[Route("api/[controller]")]
+[Route("api/role")]
 [ApiController]
 public class RoleController(IRoleRepository roleRepository, IMapper mapper) : ControllerBase
 {

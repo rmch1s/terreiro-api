@@ -10,17 +10,7 @@ public class UserRoleMapping : IEntityTypeConfiguration<UserRole>
     {
         builder.ToTable("user_roles");
 
-        builder.Property(p => p.Id)
-            .HasColumnName("id")
-            .IsRequired()
-            .UseSequence();
-
-        builder.Property(p => p.CreatedAt)
-            .HasColumnName("created_at")
-            .IsRequired();
-
-        builder.Property(p => p.DeletedAt)
-            .HasColumnName("deleted_at");
+        builder.HasKey(p => new { p.UserId, p.RoleId });
 
         builder.Property(p => p.RoleId)
             .HasColumnName("user_id")

@@ -9,7 +9,7 @@ using Terreiro.Domain.Entities;
 
 namespace Terreiro.Presentation.Controllers;
 
-[Route("api/[controller]")]
+[Route("api/event")]
 [ApiController]
 public class EventController(IEventRepository eventRepository, IMapper mapper) : ControllerBase
 {

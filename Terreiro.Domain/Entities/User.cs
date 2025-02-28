@@ -20,11 +20,11 @@ public class User : Entity
     public Cellphone Cellphone { get; private set; } = default!;
 
     public ICollection<UserRole> UserRoles { get; } = [];
-    public ICollection<Role> Roles { get; } = [];
+    public ICollection<Role> Roles { get; private set; } = [];
     public ICollection<UserEventItem> UserEventItems { get; } = [];
-    public ICollection<EventItem> EventItems { get; } = [];
+    public ICollection<EventItem> EventItems { get; private set; } = [];
     public ICollection<UserEvent> UserEvents { get; } = [];
-    public ICollection<Event> Events { get; } = [];
+    public ICollection<Event> Events { get; private set; } = [];
 
     public void SetPin(string? oldPin, string newPin)
     {
@@ -39,5 +39,10 @@ public class User : Entity
         Name = name;
         CPF = cpf;
         Cellphone = cellphone;
+    }
+
+    public void UpdateRoles(IEnumerable<Role> roles)
+    {
+        Roles = [.. roles];
     }
 }

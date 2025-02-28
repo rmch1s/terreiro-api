@@ -10,10 +10,11 @@ using Terreiro.Domain.Entities;
 
 namespace Terreiro.Presentation.Controllers;
 
-[Route("api/[controller]")]
+[Route("api/user")]
 [ApiController]
 public class UserController(
     IUserRepository userRepository,
+    IRoleRepository roleRepository,
     ISetPinService setPinService,
     IMapper mapper
 ) : ControllerBase
@@ -76,5 +77,23 @@ public class UserController(
 
         var rowsAffected = await userRepository.UpdatePin(user);
         return rowsAffected is 0 ? UnprocessableEntity(TerreiroResource.DATA_ERROR) : Ok(request.NewPin);
+    }
+
+    [HttpPatch("{id}/roles")]
+    public async Task<IActionResult> CreateRoles(int id, [FromBody] IEnumerable<int> roleIds)
+    {
+        roleIds = roleIds.Distinct();
+        var user = await userRepository.Get(id, u => u.Roles);
+        if (user is null) return NotFound(TerreiroResource.USER_NOT_FOUND_ID.InsertParams(id));
+
+        var roles = await roleRepository.Get(roleIds);
+        var nonExistentRoles = roleIds.Where(x => !roles.Any(y => y.Id == x));
+        if (nonExistentRoles.Any())
+            return NotFound(TerreiroResource.ROLE_NOT_FOUND_ID.InsertParams(string.Join(", ", nonExistentRoles)));
+
+        user.UpdateRoles(roles);
+
+        var rowsAffected = await userRepository.UpdateRoles(user);
+        return rowsAffected is 0 ? UnprocessableEntity(TerreiroResource.DATA_ERROR) : Created();
     }
 }

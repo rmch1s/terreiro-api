@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Terreiro.Persistence.Data;
@@ -11,9 +12,11 @@ using Terreiro.Persistence.Data;
 namespace Terreiro.Persistence.Migrations
 {
     [DbContext(typeof(TerreiroDbContext))]
-    partial class TerreiroDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250228220233_RemovingIdFromNNTables")]
+    partial class RemovingIdFromNNTables
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -245,7 +248,7 @@ namespace Terreiro.Persistence.Migrations
 
                             b1.HasKey("EventId");
 
-                            b1.ToTable("events", (string)null);
+                            b1.ToTable("events");
 
                             b1.WithOwner()
                                 .HasForeignKey("EventId");
@@ -287,7 +290,7 @@ namespace Terreiro.Persistence.Migrations
 
                             b1.HasKey("UserId");
 
-                            b1.ToTable("users", (string)null);
+                            b1.ToTable("users");
 
                             b1.WithOwner()
                                 .HasForeignKey("UserId");

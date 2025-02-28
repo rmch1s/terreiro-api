@@ -14,4 +14,13 @@ public class UserRepository(TerreiroDbContext db) : Repository<User>(db), IUserR
 
         return await db.SaveChangesAsync();
     }
+
+    public async Task<int> UpdateRoles(User user)
+    {
+        db.Attach(user);
+
+        db.Entry(user).Collection(p => p.Roles).IsModified = true;
+
+        return await db.SaveChangesAsync();
+    }
 }

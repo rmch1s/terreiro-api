@@ -9,11 +9,11 @@ using Terreiro.Domain.Entities;
 
 namespace Terreiro.Presentation.Controllers;
 
-[Route("api/[controller]")]
+[Route("api/event-item")]
 [ApiController]
 public class EventItemController(IEventItemRepository eventItemRepository, IMapper mapper) : ControllerBase
 {
-    [HttpPost("Event/{eventId}")]
+    [HttpPost("event/{eventId}")]
     public async Task<IActionResult> Create(int eventId, [FromBody] UpsertEventItemRequest[] request)
     {
         var eventItems = request.Select(x => new EventItem(x.Name, x.Quantity, eventId));

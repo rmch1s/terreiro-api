@@ -88,6 +88,15 @@ namespace Terreiro.Application.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to O usuário ja possuí as seguintes roles: {0}..
+        /// </summary>
+        public static string EXISTING_ROLES_ERROR {
+            get {
+                return ResourceManager.GetString("EXISTING_ROLES_ERROR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0} deve ter entre {1} e {2} caracteres..
         /// </summary>
         public static string FIELD_BETWEEN_LENGTH {
