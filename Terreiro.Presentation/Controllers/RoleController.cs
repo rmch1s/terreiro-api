@@ -23,7 +23,7 @@ public class RoleController(IRoleRepository roleRepository, IMapper mapper) : Co
     [HttpGet("{id}")]
     public async Task<IActionResult> GetById(int id)
     {
-        var role = await roleRepository.Get(id);
+        var role = await roleRepository.GetFirst(id);
         return role is null ?
             NotFound(TerreiroResource.ROLE_NOT_FOUND_ID.InsertParams(id)) :
             Ok(mapper.Map<RoleDetailsDto>(role));
@@ -40,9 +40,11 @@ public class RoleController(IRoleRepository roleRepository, IMapper mapper) : Co
     [HttpDelete("{id}")]
     public async Task<IActionResult> Delete(int id)
     {
-        var role = await roleRepository.Get(id);
+        var role = await roleRepository.GetFirst(id);
         if (role is null)
             return NotFound(TerreiroResource.ROLE_NOT_FOUND_ID.InsertParams(id));
+
+        role.SetDeletedAt();
 
         var rowsAffected = await roleRepository.Delete(role);
         return rowsAffected is 0 ? UnprocessableEntity(TerreiroResource.DATA_ERROR) : NoContent();
@@ -51,7 +53,7 @@ public class RoleController(IRoleRepository roleRepository, IMapper mapper) : Co
     [HttpPut("{id}")]
     public async Task<IActionResult> Update(int id, [FromBody] UpsertRoleRequest request)
     {
-        var role = await roleRepository.Get(id);
+        var role = await roleRepository.GetFirst(id);
         if (role is null)
             return NotFound(TerreiroResource.ROLE_NOT_FOUND_ID.InsertParams(id));
 

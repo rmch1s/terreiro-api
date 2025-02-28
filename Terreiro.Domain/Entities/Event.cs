@@ -1,8 +1,9 @@
-﻿using Terreiro.Domain.ValueObjects;
+﻿using Terreiro.Domain.Entities.Base;
+using Terreiro.Domain.ValueObjects;
 
 namespace Terreiro.Domain.Entities;
 
-public class Event : Entity
+public class Event : BaseEntity
 {
     private Event() { }
 

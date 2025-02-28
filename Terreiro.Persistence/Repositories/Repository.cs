@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
-using Terreiro.Domain.Entities;
+using Terreiro.Domain.Entities.Base;
 using Terreiro.Persistence.Data;
 
 namespace Terreiro.Persistence.Repositories;
@@ -10,18 +10,31 @@ public abstract class Repository<T>(TerreiroDbContext db) where T : Entity
     protected TerreiroDbContext db = db;
     protected DbSet<T> dbSet = db.Set<T>();
 
-    public async Task<IEnumerable<T>> Get() =>
-        await dbSet.AsNoTracking().Where(e => !e.DeletedAt.HasValue).ToListAsync();
-
-    public async Task<T?> Get(int id, params Expression<Func<T, object>>[] includes)
+    public async Task<IEnumerable<T>> Get()
     {
-        var query = dbSet.AsQueryable();
+        var query = dbSet.AsNoTracking();
+
+        if (typeof(BaseEntity).IsAssignableFrom(typeof(T)))
+            query = query.Where(e => !EF.Property<DateTime?>(e, "DeletedAt").HasValue);
+
+        return await query.ToListAsync();
+    }
+
+    public async Task<T?> GetFirst(int id, params Expression<Func<T, object>>[] includes)
+    {
+        var query = dbSet.AsNoTracking();
 
         if (includes is not null)
             foreach (var include in includes)
                 query = query.Include(include);
 
-        return await query.FirstOrDefaultAsync(e => e.Id == id && !e.DeletedAt.HasValue);
+        if (typeof(BaseEntity).IsAssignableFrom(typeof(T)))
+        {
+            query = query.Where(e => EF.Property<int>(e, "Id").Equals(id));
+            query = query.Where(e => !EF.Property<DateTime?>(e, "DeletedAt").HasValue);
+        }
+
+        return await query.FirstOrDefaultAsync();
     }
 
     public async Task<int> Add(T entity)
@@ -47,11 +60,13 @@ public abstract class Repository<T>(TerreiroDbContext db) where T : Entity
 
     public async Task<int> Delete(T entity)
     {
-        entity.SetDeletedAt();
-
         db.Attach(entity);
 
-        db.Entry(entity).Property(p => p.DeletedAt).IsModified = true;
+        if (entity is BaseEntity baseEntity)
+            db.Entry(baseEntity).Property(p => p.DeletedAt).IsModified = true;
+        else
+            dbSet.Remove(entity);
+
 
         return await db.SaveChangesAsync();
     }

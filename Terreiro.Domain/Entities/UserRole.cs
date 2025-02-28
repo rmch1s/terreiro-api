@@ -1,6 +1,8 @@
-﻿namespace Terreiro.Domain.Entities;
+﻿using Terreiro.Domain.Entities.Base;
 
-public class UserRole
+namespace Terreiro.Domain.Entities;
+
+public class UserRole : Entity
 {
     private UserRole() { }
 

@@ -1,9 +1,10 @@
-﻿using Terreiro.Domain.Execptions;
+﻿using Terreiro.Domain.Entities.Base;
+using Terreiro.Domain.Execptions;
 using Terreiro.Domain.ValueObjects;
 
 namespace Terreiro.Domain.Entities;
 
-public class User : Entity
+public class User : BaseEntity
 {
     private User() { }
 

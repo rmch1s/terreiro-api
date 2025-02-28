@@ -17,5 +17,6 @@ public static class InfrastructureConfiguration
         services.AddScoped<IRoleRepository, RoleRepository>();
         services.AddScoped<IEventRepository, EventRepository>();
         services.AddScoped<IEventItemRepository, EventItemRepository>();
+        services.AddScoped<IUserEventRepository, UserEventRepository>();
     }
 }

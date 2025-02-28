@@ -25,9 +25,11 @@ public class EventItemController(IEventItemRepository eventItemRepository, IMapp
     [HttpDelete("{id}")]
     public async Task<IActionResult> Delete(int id)
     {
-        var eventItem = await eventItemRepository.Get(id);
+        var eventItem = await eventItemRepository.GetFirst(id);
         if (eventItem is null)
             return NotFound(TerreiroResource.EVENT_ITEM_NOT_FOUND_ID.InsertParams(id));
+
+        eventItem.SetDeletedAt();
 
         var rowsAffected = await eventItemRepository.Delete(eventItem);
         return rowsAffected is 0 ? UnprocessableEntity(TerreiroResource.DATA_ERROR) : NoContent();
@@ -36,7 +38,7 @@ public class EventItemController(IEventItemRepository eventItemRepository, IMapp
     [HttpPut("{id}")]
     public async Task<IActionResult> Update(int id, [FromBody] UpsertEventItemRequest request)
     {
-        var eventItem = await eventItemRepository.Get(id);
+        var eventItem = await eventItemRepository.GetFirst(id);
         if (eventItem is null)
             return NotFound(TerreiroResource.EVENT_ITEM_NOT_FOUND_ID.InsertParams(id));
 

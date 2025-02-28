@@ -1,6 +1,6 @@
-﻿namespace Terreiro.Domain.Entities;
+﻿namespace Terreiro.Domain.Entities.Base;
 
-public abstract class Entity
+public abstract class BaseEntity : Entity
 {
     public int Id { get; }
     public DateTime CreatedAt { get; } = DateTime.UtcNow;

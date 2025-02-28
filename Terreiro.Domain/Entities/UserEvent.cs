@@ -1,6 +1,8 @@
-﻿namespace Terreiro.Domain.Entities;
+﻿using Terreiro.Domain.Entities.Base;
 
-public class UserEvent
+namespace Terreiro.Domain.Entities;
+
+public class UserEvent : Entity
 {
     private UserEvent() { }
 

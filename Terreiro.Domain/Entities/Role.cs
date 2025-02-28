@@ -1,6 +1,8 @@
-﻿namespace Terreiro.Domain.Entities;
+﻿using Terreiro.Domain.Entities.Base;
 
-public class Role(string name, string? description = null) : Entity
+namespace Terreiro.Domain.Entities;
+
+public class Role(string name, string? description = null) : BaseEntity
 {
     public string Name { get; private set; } = name;
     public string? Description { get; private set; } = description;

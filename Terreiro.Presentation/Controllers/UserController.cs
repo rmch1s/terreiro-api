@@ -6,6 +6,7 @@ using Terreiro.Application.Repositories;
 using Terreiro.Application.Requests;
 using Terreiro.Application.Resources;
 using Terreiro.Application.Services.SetPin;
+using Terreiro.Application.Services.UpdateUserEvent;
 using Terreiro.Domain.Entities;
 
 namespace Terreiro.Presentation.Controllers;
@@ -15,7 +16,9 @@ namespace Terreiro.Presentation.Controllers;
 public class UserController(
     IUserRepository userRepository,
     IRoleRepository roleRepository,
+    IEventRepository eventRepository,
     ISetPinService setPinService,
+    IUpdateUserEventService updateUserEventService,
     IMapper mapper
 ) : ControllerBase
 {
@@ -29,7 +32,7 @@ public class UserController(
     [HttpGet("{id}")]
     public async Task<IActionResult> GetById(int id)
     {
-        var user = await userRepository.Get(id, u => u.Roles.Where(r => !r.DeletedAt.HasValue));
+        var user = await userRepository.GetFirst(id, u => u.Roles.Where(r => !r.DeletedAt.HasValue));
         return user is null ?
             NotFound(TerreiroResource.USER_NOT_FOUND_ID.InsertParams(id)) :
             Ok(mapper.Map<UserDetailsDto>(user));
@@ -46,8 +49,10 @@ public class UserController(
     [HttpDelete("{id}")]
     public async Task<IActionResult> Delete(int id)
     {
-        var user = await userRepository.Get(id);
+        var user = await userRepository.GetFirst(id);
         if (user is null) return NotFound(TerreiroResource.USER_NOT_FOUND_ID.InsertParams(id));
+
+        user.SetDeletedAt();
 
         var rowsAffected = await userRepository.Delete(user);
         return rowsAffected is 0 ? UnprocessableEntity(TerreiroResource.DATA_ERROR) : NoContent();
@@ -56,7 +61,7 @@ public class UserController(
     [HttpPut("{id}")]
     public async Task<IActionResult> Update(int id, [FromBody] UpsertUserRequest request)
     {
-        var user = await userRepository.Get(id);
+        var user = await userRepository.GetFirst(id);
         if (user is null) return NotFound(TerreiroResource.USER_NOT_FOUND_ID.InsertParams(id));
 
         user.Update(request.Name, request.CPF, request.Cellphone);
@@ -68,9 +73,9 @@ public class UserController(
     }
 
     [HttpPatch("{id}/pin")]
-    public async Task<IActionResult> PatchPin(int id, [FromBody] PatchPinRequest request)
+    public async Task<IActionResult> UpdatePin(int id, [FromBody] PatchPinRequest request)
     {
-        var user = await userRepository.Get(id);
+        var user = await userRepository.GetFirst(id);
         if (user is null) return NotFound(TerreiroResource.USER_NOT_FOUND_ID.InsertParams(id));
 
         setPinService.SetPin(user, request.OldPin, request.NewPin);
@@ -80,10 +85,10 @@ public class UserController(
     }
 
     [HttpPatch("{id}/roles")]
-    public async Task<IActionResult> CreateRoles(int id, [FromBody] IEnumerable<int> roleIds)
+    public async Task<IActionResult> UpdateRoles(int id, [FromBody] IEnumerable<int> roleIds)
     {
         roleIds = roleIds.Distinct();
-        var user = await userRepository.Get(id, u => u.Roles);
+        var user = await userRepository.GetFirst(id, u => u.Roles);
         if (user is null) return NotFound(TerreiroResource.USER_NOT_FOUND_ID.InsertParams(id));
 
         var roles = await roleRepository.Get(roleIds);
@@ -94,6 +99,25 @@ public class UserController(
         user.UpdateRoles(roles);
 
         var rowsAffected = await userRepository.UpdateRoles(user);
-        return rowsAffected is 0 ? UnprocessableEntity(TerreiroResource.DATA_ERROR) : Created();
+        return rowsAffected is 0 ?
+            UnprocessableEntity(TerreiroResource.DATA_ERROR) :
+            Ok(mapper.Map<RoleDto[]>(roles));
+    }
+
+    [HttpPatch("{id}/event/{eventId}")]
+    public async Task<IActionResult> UpdateEvent(int id, int eventId)
+    {
+        var user = await userRepository.GetFirst(id, u => u.Events.Where(e => e.Id == eventId));
+        if (user is null)
+            return NotFound(TerreiroResource.USER_NOT_FOUND_ID.InsertParams(id));
+
+        var @event = await eventRepository.GetFirst(eventId);
+        if (@event is null)
+            return NotFound(TerreiroResource.EVENT_NOT_FOUND_ID.InsertParams(id));
+
+        var (rowsAffected, updatedEvent) = await updateUserEventService.Update(user, @event);
+        return rowsAffected is 0 ?
+            UnprocessableEntity(TerreiroResource.DATA_ERROR) :
+            Ok(mapper.Map<EventDto?>(updatedEvent));
     }
 }

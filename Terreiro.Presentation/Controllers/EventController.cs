@@ -23,7 +23,7 @@ public class EventController(IEventRepository eventRepository, IMapper mapper) :
     [HttpGet("{id}")]
     public async Task<IActionResult> GetById(int id)
     {
-        var @event = await eventRepository.Get(
+        var @event = await eventRepository.GetFirst(
             id,
             e => e.Users.Where(u => !u.DeletedAt.HasValue),
             e => e.Items.Where(ei => !ei.DeletedAt.HasValue)
@@ -47,9 +47,11 @@ public class EventController(IEventRepository eventRepository, IMapper mapper) :
     [HttpDelete("{id}")]
     public async Task<IActionResult> Delete(int id)
     {
-        var @event = await eventRepository.Get(id);
+        var @event = await eventRepository.GetFirst(id);
         if (@event is null)
             return NotFound(TerreiroResource.EVENT_NOT_FOUND_ID.InsertParams(id));
+
+        @event.SetDeletedAt();
 
         var rowsAffected = await eventRepository.Delete(@event);
         return rowsAffected is 0 ? UnprocessableEntity(TerreiroResource.DATA_ERROR) : NoContent();
@@ -58,7 +60,7 @@ public class EventController(IEventRepository eventRepository, IMapper mapper) :
     [HttpPut("{id}")]
     public async Task<IActionResult> Update(int id, [FromBody] UpdateEventRequest request)
     {
-        var @event = await eventRepository.Get(id);
+        var @event = await eventRepository.GetFirst(id);
         if (@event is null)
             return NotFound(TerreiroResource.EVENT_NOT_FOUND_ID.InsertParams(id));
 
