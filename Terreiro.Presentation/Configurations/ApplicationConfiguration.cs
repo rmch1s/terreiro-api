@@ -1,5 +1,6 @@
 ﻿using Terreiro.Application.Services.SetPin;
 using Terreiro.Application.Services.UpdateUserEvent;
+using Terreiro.Application.Services.UpdateUserEventItem;
 
 namespace Terreiro.Presentation.Configuration;
 
@@ -9,5 +10,6 @@ public static class ApplicationConfiguration
     {
         services.AddScoped<ISetPinService, SetPinService>();
         services.AddScoped<IUpdateUserEventService, UpdateUserEventService>();
+        services.AddScoped<IUpdateUserEventItemService, UpdateUserEventItemService>();
     }
 }

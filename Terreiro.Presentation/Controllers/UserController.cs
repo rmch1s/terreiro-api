@@ -7,6 +7,7 @@ using Terreiro.Application.Requests;
 using Terreiro.Application.Resources;
 using Terreiro.Application.Services.SetPin;
 using Terreiro.Application.Services.UpdateUserEvent;
+using Terreiro.Application.Services.UpdateUserEventItem;
 using Terreiro.Domain.Entities;
 
 namespace Terreiro.Presentation.Controllers;
@@ -17,8 +18,10 @@ public class UserController(
     IUserRepository userRepository,
     IRoleRepository roleRepository,
     IEventRepository eventRepository,
+    IEventItemRepository eventItemRepository,
     ISetPinService setPinService,
     IUpdateUserEventService updateUserEventService,
+    IUpdateUserEventItemService updateUserEventItemService,
     IMapper mapper
 ) : ControllerBase
 {
@@ -119,5 +122,22 @@ public class UserController(
         return rowsAffected is 0 ?
             UnprocessableEntity(TerreiroResource.DATA_ERROR) :
             Ok(mapper.Map<EventDto?>(updatedEvent));
+    }
+
+    [HttpPatch("{id}/event-item/{eventItemId}")]
+    public async Task<IActionResult> UpdateEventItem(int id, int eventItemId)
+    {
+        var user = await userRepository.GetFirst(id, u => u.EventItems.Where(e => e.Id == eventItemId));
+        if (user is null)
+            return NotFound(TerreiroResource.USER_NOT_FOUND_ID.InsertParams(id));
+
+        var eventItem = await eventItemRepository.GetFirst(eventItemId);
+        if (eventItem is null)
+            return NotFound(TerreiroResource.EVENT_NOT_FOUND_ID.InsertParams(id));
+
+        var (rowsAffected, updatedEventItem) = await updateUserEventItemService.Update(user, eventItem);
+        return rowsAffected is 0 ?
+            UnprocessableEntity(TerreiroResource.DATA_ERROR) :
+            Ok(mapper.Map<EventItemDto?>(updatedEventItem));
     }
 }

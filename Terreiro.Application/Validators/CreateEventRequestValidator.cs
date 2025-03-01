@@ -13,9 +13,12 @@ public class CreateEventRequestValidator : AbstractValidator<CreateEventRequest>
             .Must(x => x.Length >= 5 && x.Length <= 100)
             .WithMessage(x => TerreiroResource.FIELD_BETWEEN_LENGTH.InsertParams(nameof(x.Name), 5, 100));
 
-        RuleFor(x => x.Description)
-            .Must(x => x.Length >= 5 && x.Length <= 100)
-            .WithMessage(x => TerreiroResource.FIELD_BETWEEN_LENGTH.InsertParams(nameof(x.Description), 5, 300));
+        When(x => x.Description is not null, () =>
+        {
+            RuleFor(x => x.Description)
+                .Must(x => x.Length >= 5 && x.Length <= 100)
+                .WithMessage(x => TerreiroResource.FIELD_BETWEEN_LENGTH.InsertParams(nameof(x.Description), 5, 300));
+        });
 
         RuleForEach(x => x.Items)
             .SetValidator(new UpsertEventItemRequestValidator());

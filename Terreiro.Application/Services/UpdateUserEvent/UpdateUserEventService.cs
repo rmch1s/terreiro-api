@@ -11,7 +11,7 @@ public class UpdateUserEventService(IUserEventRepository userEventRepository) : 
         var isAdding = !user.Events.Any(e => e.Id == @event.Id);
 
         var rowsAffected = isAdding
-            ? await userEventRepository.Update(userEvent)
+            ? await userEventRepository.Add(userEvent)
             : await userEventRepository.Delete(userEvent);
 
         return (rowsAffected, isAdding ? @event : null);

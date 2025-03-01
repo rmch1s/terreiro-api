@@ -12,7 +12,7 @@ public class EventRepository(TerreiroDbContext db) : Repository<Event>(db), IEve
             .AsNoTracking()
             .Where(e =>
                 !e.DeletedAt.HasValue &&
-                (!startDate.HasValue || startDate >= e.Period.StartDate) &&
-                (!endDate.HasValue || endDate <= e.Period.StartDate)
+                (!startDate.HasValue || e.Period.StartDate >= startDate) &&
+                (!endDate.HasValue || e.Period.StartDate <= endDate)
         ).ToListAsync();
 }
