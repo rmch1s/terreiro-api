@@ -1,14 +1,18 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Terreiro.Application.Dtos;
+using Terreiro.Application.Enums;
 using Terreiro.Application.Helpers;
 using Terreiro.Application.Repositories;
 using Terreiro.Application.Requests;
 using Terreiro.Application.Resources;
 using Terreiro.Domain.Entities;
+using Terreiro.Presentation.Attributes;
 
 namespace Terreiro.Presentation.Controllers;
 
+[Authorize]
 [Route("api/event")]
 [ApiController]
 public class EventController(IEventRepository eventRepository, IMapper mapper) : ControllerBase
@@ -16,6 +20,7 @@ public class EventController(IEventRepository eventRepository, IMapper mapper) :
     [HttpGet]
     public async Task<IActionResult> Get([FromQuery] DateTime? startDate, [FromQuery] DateTime? endDate)
     {
+        var user = HttpContext.User;
         var events = await eventRepository.Get(startDate, endDate);
         return Ok(mapper.Map<EventDto[]>(events));
     }
@@ -34,6 +39,7 @@ public class EventController(IEventRepository eventRepository, IMapper mapper) :
             Ok(mapper.Map<EventDetailsDto>(@event));
     }
 
+    [AuthorizeRoles(EUserRole.Admin)]
     [HttpPost]
     public async Task<IActionResult> Create([FromBody] CreateEventRequest request)
     {
@@ -44,6 +50,7 @@ public class EventController(IEventRepository eventRepository, IMapper mapper) :
         return rowsAffected is 0 ? UnprocessableEntity(TerreiroResource.DATA_ERROR) : Created();
     }
 
+    [AuthorizeRoles(EUserRole.Admin)]
     [HttpDelete("{id}")]
     public async Task<IActionResult> Delete(int id)
     {
@@ -57,6 +64,7 @@ public class EventController(IEventRepository eventRepository, IMapper mapper) :
         return rowsAffected is 0 ? UnprocessableEntity(TerreiroResource.DATA_ERROR) : NoContent();
     }
 
+    [AuthorizeRoles(EUserRole.Admin)]
     [HttpPut("{id}")]
     public async Task<IActionResult> Update(int id, [FromBody] UpdateEventRequest request)
     {

@@ -5,21 +5,14 @@ using Terreiro.Application.Resources;
 
 namespace Terreiro.Application.Validators;
 
-public class UpsertUserRequestValidator : AbstractValidator<UpsertUserRequest>
+public class LoginRequestValidator : AbstractValidator<LoginRequest>
 {
-    public UpsertUserRequestValidator()
+    public LoginRequestValidator()
     {
-        RuleFor(x => x.Name)
-            .Must(x => x.Length >= 5 && x.Length <= 100)
-            .WithMessage(x => TerreiroResource.FIELD_BETWEEN_LENGTH.InsertParams(nameof(x.Name), 5, 100));
-
         RuleFor(x => x.CPF)
             .Must(x => x.Length is 11)
             .WithMessage(x => TerreiroResource.FIELD_MUST_BE_LENGTH.InsertParams(nameof(x.CPF), 11))
             .Matches(@"^\d+$")
             .WithMessage(x => TerreiroResource.FIELD_ONLY_NUMBERS.InsertParams(nameof(x.CPF)));
-
-        RuleFor(x => x.Cellphone)
-            .SetValidator(new CellphoneValidator());
     }
 }

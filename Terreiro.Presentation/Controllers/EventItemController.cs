@@ -1,16 +1,21 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Terreiro.Application.Dtos;
+using Terreiro.Application.Enums;
 using Terreiro.Application.Helpers;
 using Terreiro.Application.Repositories;
 using Terreiro.Application.Requests;
 using Terreiro.Application.Resources;
 using Terreiro.Domain.Entities;
+using Terreiro.Presentation.Attributes;
 
 namespace Terreiro.Presentation.Controllers;
 
+[Authorize]
 [Route("api/event-item")]
 [ApiController]
+[AuthorizeRoles(EUserRole.Admin)]
 public class EventItemController(IEventItemRepository eventItemRepository, IMapper mapper) : ControllerBase
 {
     [HttpPost("event/{eventId}")]

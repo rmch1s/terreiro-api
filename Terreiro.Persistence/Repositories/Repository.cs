@@ -7,8 +7,8 @@ namespace Terreiro.Persistence.Repositories;
 
 public abstract class Repository<T>(TerreiroDbContext db) where T : Entity
 {
-    protected TerreiroDbContext db = db;
-    protected DbSet<T> dbSet = db.Set<T>();
+    protected readonly TerreiroDbContext db = db;
+    protected readonly DbSet<T> dbSet = db.Set<T>();
 
     public async Task<IEnumerable<T>> Get()
     {
@@ -53,6 +53,8 @@ public abstract class Repository<T>(TerreiroDbContext db) where T : Entity
 
     public async Task<int> Update(T entity)
     {
+        db.Attach(entity);
+
         dbSet.Update(entity);
 
         return await db.SaveChangesAsync();
@@ -66,7 +68,6 @@ public abstract class Repository<T>(TerreiroDbContext db) where T : Entity
             db.Entry(baseEntity).Property(p => p.DeletedAt).IsModified = true;
         else
             dbSet.Remove(entity);
-
 
         return await db.SaveChangesAsync();
     }

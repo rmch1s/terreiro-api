@@ -142,6 +142,15 @@ namespace Terreiro.Application.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Usuário não tem permissão para realizar essa ação..
+        /// </summary>
+        public static string FORBIDDEN_MESSAGE {
+            get {
+                return ResourceManager.GetString("FORBIDDEN_MESSAGE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Ocorreu um erro interno no servidor, para mais detalhes contate o suporte..
         /// </summary>
         public static string INTERNAL_SERVER_ERROR_MESSAGE {
@@ -156,6 +165,33 @@ namespace Terreiro.Application.Resources {
         public static string ROLE_NOT_FOUND_ID {
             get {
                 return ResourceManager.GetString("ROLE_NOT_FOUND_ID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Usuário não autenticado..
+        /// </summary>
+        public static string UNAUTHORIZED_MESSAGE {
+            get {
+                return ResourceManager.GetString("UNAUTHORIZED_MESSAGE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ocorreu um erro desconhecido..
+        /// </summary>
+        public static string UNKNOWN_ERROR {
+            get {
+                return ResourceManager.GetString("UNKNOWN_ERROR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Não foi encontrado o usuário de  CPF {0}..
+        /// </summary>
+        public static string USER_NOT_FOUND_CPF {
+            get {
+                return ResourceManager.GetString("USER_NOT_FOUND_CPF", resourceCulture);
             }
         }
         

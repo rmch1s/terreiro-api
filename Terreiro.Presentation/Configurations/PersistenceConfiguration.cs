@@ -3,11 +3,11 @@ using Terreiro.Application.Repositories;
 using Terreiro.Persistence.Data;
 using Terreiro.Persistence.Repositories;
 
-namespace Terreiro.Presentation.Configuration;
+namespace Terreiro.Presentation.Configurations;
 
-public static class InfrastructureConfiguration
+public static class PersistenceConfiguration
 {
-    public static void AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
+    public static void AddPersistenceConfiguration(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddDbContext<TerreiroDbContext>(options =>
             options.UseNpgsql(configuration.GetConnectionString("Default"))
@@ -19,5 +19,6 @@ public static class InfrastructureConfiguration
         services.AddScoped<IEventItemRepository, EventItemRepository>();
         services.AddScoped<IUserEventRepository, UserEventRepository>();
         services.AddScoped<IUserEventItemRepository, UserEventItemRepository>();
+        services.AddScoped<IUserRoleRepository, UserRoleRepository>();
     }
 }

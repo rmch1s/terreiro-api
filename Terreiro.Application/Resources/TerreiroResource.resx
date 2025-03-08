@@ -151,12 +151,25 @@
     <value>{0} deve ser composto apenas por números</value>
     <comment>0 - Nome campo</comment>
   </data>
+  <data name="FORBIDDEN_MESSAGE" xml:space="preserve">
+    <value>Usuário não tem permissão para realizar essa ação.</value>
+  </data>
   <data name="INTERNAL_SERVER_ERROR_MESSAGE" xml:space="preserve">
     <value>Ocorreu um erro interno no servidor, para mais detalhes contate o suporte.</value>
   </data>
   <data name="ROLE_NOT_FOUND_ID" xml:space="preserve">
     <value>Não foi encontrado a role de id {0}.</value>
     <comment>0 - número id</comment>
+  </data>
+  <data name="UNAUTHORIZED_MESSAGE" xml:space="preserve">
+    <value>Usuário não autenticado.</value>
+  </data>
+  <data name="UNKNOWN_ERROR" xml:space="preserve">
+    <value>Ocorreu um erro desconhecido.</value>
+  </data>
+  <data name="USER_NOT_FOUND_CPF" xml:space="preserve">
+    <value>Não foi encontrado o usuário de  CPF {0}.</value>
+    <comment>0 - número CPF</comment>
   </data>
   <data name="USER_NOT_FOUND_ID" xml:space="preserve">
     <value>Não foi encontrado o usuário de id {0}.</value>

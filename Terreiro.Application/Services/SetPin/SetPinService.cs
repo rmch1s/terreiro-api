@@ -15,7 +15,7 @@ public class SetPinService : ISetPinService
         }
         catch (WrongPinException)
         {
-            throw new BadRequestExeption(TerreiroResource.WRONG_PIN);
+            throw new BadRequestException(TerreiroResource.WRONG_PIN);
         }
     }
 }

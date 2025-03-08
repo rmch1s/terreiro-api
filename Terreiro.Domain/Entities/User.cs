@@ -41,9 +41,4 @@ public class User : BaseEntity
         CPF = cpf;
         Cellphone = cellphone;
     }
-
-    public void UpdateRoles(IEnumerable<Role> roles)
-    {
-        Roles = [.. roles];
-    }
 }
