@@ -23,11 +23,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Using Include="Xunit" />
+    <ProjectReference Include="..\Terreiro.Application\Terreiro.Application.csproj" />
+    <ProjectReference Include="..\Terreiro.Domain\Terreiro.Domain.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Entities\" />
+    <Using Include="Xunit" />
   </ItemGroup>
 
 </Project>
