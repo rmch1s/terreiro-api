@@ -17,7 +17,7 @@ public class EventTest
     {
         //Arrange
         var expectedName = _faker.Person.FirstName;
-        var expectedPeriod = new Period(_faker.Date.Future(), _faker.Date.Future());
+        var expectedPeriod = new Period(_faker.Date.Future(), _faker.Date.Future().OrNull(_faker));
         var expetedItems = EventItemFixture.GenerateEventItems(1).ToArray();
         var expectedDescription = _faker.Random.String().OrNull(_faker);
 
@@ -38,17 +38,13 @@ public class EventTest
     public void Update_GivenAllParameters_ThenSetPropertiesCorrectly()
     {
         // Arrange
+        var @event = EventFixture.GenerateEvents(1).First();
+
         var expectedName = _faker.Person.FirstName;
         var expectedPeriod = new Period(_faker.Date.Future(), _faker.Date.Future());
         var expectedDescription = _faker.Random.String().OrNull(_faker);
 
-        var name = _faker.Person.FirstName;
-        var period = new Period(_faker.Date.Future(), _faker.Date.Future());
-        var description = _faker.Random.String().OrNull(_faker);
-        var items = EventItemFixture.GenerateEventItems(1).ToArray();
-
         //Act
-        var @event = new Event(name, period, items, description);
         @event.Update(expectedName, expectedPeriod, expectedDescription);
 
         //Assert
@@ -64,13 +60,9 @@ public class EventTest
     public void SetDeletedAt_WhenIsCalled_SetDeletedAtCorrectly()
     {
         //Arrange
-        var name = _faker.Person.FirstName;
-        var period = new Period(_faker.Date.Future(), _faker.Date.Future());
-        var description = _faker.Random.String().OrNull(_faker);
-        var items = EventItemFixture.GenerateEventItems(1).ToArray();
+        var @event = EventFixture.GenerateEvents(1).First();
 
         //Act
-        var @event = new Event(name, period, items, description);
         @event.SetDeletedAt();
 
         //Assert
