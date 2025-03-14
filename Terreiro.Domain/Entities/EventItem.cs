@@ -25,5 +25,6 @@ public class EventItem : BaseEntity
     {
         Name = name;
         Quantity = quantity;
+        UpdatedAt = DateTime.UtcNow;
     }
 }

@@ -40,5 +40,6 @@ public class User : BaseEntity
         Name = name;
         CPF = cpf;
         Cellphone = cellphone;
+        UpdatedAt = DateTime.Now;
     }
 }

@@ -14,5 +14,6 @@ public class Role(string name, string? description = null) : BaseEntity
     {
         Name = name;
         Description = description;
+        UpdatedAt = DateTime.UtcNow;
     }
 }

@@ -28,5 +28,6 @@ public class Event : BaseEntity
         Name = name;
         Period = period;
         Description = description;
+        UpdatedAt = DateTime.UtcNow;
     }
 }

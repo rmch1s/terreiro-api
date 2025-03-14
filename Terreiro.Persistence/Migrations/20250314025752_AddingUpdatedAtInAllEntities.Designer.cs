@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Terreiro.Persistence.Configurations;
@@ -11,9 +12,11 @@ using Terreiro.Persistence.Configurations;
 namespace Terreiro.Persistence.Migrations
 {
     [DbContext(typeof(TerreiroDbContext))]
-    partial class TerreiroDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250314025752_AddingUpdatedAtInAllEntities")]
+    partial class AddingUpdatedAtInAllEntities
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
