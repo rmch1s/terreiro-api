@@ -19,9 +19,8 @@ public class Event : BaseEntity
     public string? Description { get; private set; }
     public Period Period { get; private set; } = default!;
 
-    public ICollection<EventItem> Items { get; } = [];
-    public ICollection<UserEvent> UserEvents { get; } = [];
-    public ICollection<User> Users { get; } = [];
+    public virtual ICollection<EventItem> Items { get; } = [];
+    public virtual ICollection<User> Users { get; } = [];
 
     public void Update(string name, Period period, string? description)
     {

@@ -18,8 +18,7 @@ public class EventItem : BaseEntity
     public int EventId { get; }
 
     public virtual Event Event { get; } = default!;
-    public ICollection<UserEventItem> UserEventItems { get; } = [];
-    public ICollection<User> Users { get; } = [];
+    public virtual ICollection<User> Users { get; } = [];
 
     public void Update(string name, int quantity)
     {

@@ -20,12 +20,9 @@ public class User : BaseEntity
     public string? PIN { get; set; }
     public Cellphone Cellphone { get; private set; } = default!;
 
-    public ICollection<UserRole> UserRoles { get; } = [];
-    public ICollection<Role> Roles { get; private set; } = [];
-    public ICollection<UserEventItem> UserEventItems { get; } = [];
-    public ICollection<EventItem> EventItems { get; private set; } = [];
-    public ICollection<UserEvent> UserEvents { get; } = [];
-    public ICollection<Event> Events { get; private set; } = [];
+    public virtual ICollection<Role> Roles { get; private set; } = [];
+    public virtual ICollection<EventItem> EventItems { get; private set; } = [];
+    public virtual ICollection<Event> Events { get; private set; } = [];
 
     public void SetPin(string? oldPin, string newPin)
     {
