@@ -4,24 +4,24 @@ using Terreiro.Domain.ValueObjects;
 
 namespace Terreiro.Tests.ValueObjects;
 
-public class PeriodTest
+public class CellphoneTest
 {
     private readonly Faker _faker = new("pt_BR");
 
     [Fact]
-    [Trait("Category", "Period")]
+    [Trait("Category", "Cellphone")]
     [Trait("Method", "Constructor")]
     public void Constructor_GivenAllParameters_ThenSetPropertiesCorrectly()
     {
         //Arrange
-        var expectedStartDate = _faker.Date.Future();
-        var expectedEndDate = _faker.Date.Future().OrNull(_faker);
+        var ddd = _faker.Random.UInt(2).ToString();
+        var number = _faker.Random.UInt(7, 8).ToString();
 
         // Act
-        var period = new Period(expectedStartDate, expectedEndDate);
+        var period = new Cellphone(ddd, number);
 
         // Assert
-        period.StartDate.Should().Be(expectedStartDate);
-        period.EndDate.Should().Be(expectedEndDate);
+        period.DDD.Should().Be(ddd);
+        period.Number.Should().Be(number);
     }
 }

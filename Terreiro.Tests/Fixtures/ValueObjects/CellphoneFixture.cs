@@ -8,7 +8,7 @@ public class CellphoneFixture
     public static IEnumerable<Cellphone> GenerateCellphones(int quantity) =>
         new Faker<Cellphone>()
             .CustomInstantiator(f => new(
-                f.Random.String(3),
-                f.Random.String(8, 9))
+                f.Random.UInt(2).ToString(),
+                f.Random.UInt(8, 9).ToString())
             ).Generate(quantity);
 }

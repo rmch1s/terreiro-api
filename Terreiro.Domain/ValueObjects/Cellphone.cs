@@ -12,10 +12,4 @@ public class Cellphone
 
     public string DDD { get; private set; } = string.Empty;
     public string Number { get; private set; } = string.Empty;
-
-    public void SetCellphone(string ddd, string number)
-    {
-        DDD = ddd;
-        Number = number;
-    }
 }
