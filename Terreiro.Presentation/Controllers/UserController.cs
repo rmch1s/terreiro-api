@@ -53,7 +53,9 @@ public class UserController(
     {
         var user = new User(request.Name, request.CPF, request.Cellphone);
         var rowsAffected = await userRepository.Add(user);
-        return rowsAffected is 0 ? UnprocessableEntity(TerreiroResource.DATA_ERROR) : Created();
+        return rowsAffected is 0 ?
+            UnprocessableEntity(TerreiroResource.DATA_ERROR) :
+            Created("", mapper.Map<UserDto>(user));
     }
 
     [AuthorizeRoles(EUserRole.Admin)]

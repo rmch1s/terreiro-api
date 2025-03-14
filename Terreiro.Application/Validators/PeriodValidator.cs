@@ -5,7 +5,7 @@ using Terreiro.Domain.ValueObjects;
 
 namespace Terreiro.Application.Validators;
 
-internal class PeriodValidator : AbstractValidator<Period>
+public class PeriodValidator : AbstractValidator<Period>
 {
     public PeriodValidator()
     {

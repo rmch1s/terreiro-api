@@ -2,18 +2,10 @@
 
 namespace Terreiro.Domain.Entities;
 
-public class UserEventItem : Entity
+public class UserEventItem(int userId, int eventItemId) : Entity
 {
-    private UserEventItem() { }
-
-    public UserEventItem(int userId, int eventItemId)
-    {
-        UserId = userId;
-        EventItemId = eventItemId;
-    }
-
-    public int UserId { get; }
-    public int EventItemId { get; }
+    public int UserId { get; } = userId;
+    public int EventItemId { get; } = eventItemId;
 
     public virtual User User { get; } = default!;
     public virtual EventItem EventItem { get; } = default!;

@@ -5,7 +5,7 @@ using Terreiro.Application.Resources;
 
 namespace Terreiro.Application.Validators;
 
-internal class UpsertEventItemRequestValidator : AbstractValidator<UpsertEventItemRequest>
+public class UpsertEventItemRequestValidator : AbstractValidator<UpsertEventItemRequest>
 {
     public UpsertEventItemRequestValidator()
     {
@@ -16,5 +16,14 @@ internal class UpsertEventItemRequestValidator : AbstractValidator<UpsertEventIt
         RuleFor(x => x.Quantity)
             .GreaterThan(0)
             .WithMessage(x => TerreiroResource.FIELD_GREATER_THAN.InsertParams(nameof(x.Quantity), 0));
+    }
+}
+
+
+public class UpsertEventItemsRequestValidator : AbstractValidator<UpsertEventItemRequest[]>
+{
+    public UpsertEventItemsRequestValidator()
+    {
+        RuleForEach(x => x).SetValidator(new UpsertEventItemRequestValidator());
     }
 }

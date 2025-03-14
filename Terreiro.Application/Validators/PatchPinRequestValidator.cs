@@ -5,7 +5,7 @@ using Terreiro.Application.Resources;
 
 namespace Terreiro.Application.Validators;
 
-internal class PatchPinRequestValidator : AbstractValidator<PatchPinRequest>
+public class PatchPinRequestValidator : AbstractValidator<PatchPinRequest>
 {
     public PatchPinRequestValidator()
     {

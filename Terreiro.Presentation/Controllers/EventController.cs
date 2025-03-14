@@ -42,11 +42,14 @@ public class EventController(IEventRepository eventRepository, IMapper mapper) :
     [HttpPost]
     public async Task<IActionResult> Create([FromBody] CreateEventRequest request)
     {
+        request.Items ??= [];
         var items = mapper.Map<EventItem[]>(request.Items);
         var @event = new Event(request.Name, request.Period, items, request.Description);
 
         var rowsAffected = await eventRepository.Add(@event);
-        return rowsAffected is 0 ? UnprocessableEntity(TerreiroResource.DATA_ERROR) : Created();
+        return rowsAffected is 0 ?
+            UnprocessableEntity(TerreiroResource.DATA_ERROR) :
+            Created("", mapper.Map<EventDto>(@event));
     }
 
     [AuthorizeRoles(EUserRole.Admin)]

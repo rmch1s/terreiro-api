@@ -16,15 +16,26 @@ namespace Terreiro.Presentation.Controllers;
 [Route("api/event-item")]
 [ApiController]
 [AuthorizeRoles(EUserRole.Admin)]
-public class EventItemController(IEventItemRepository eventItemRepository, IMapper mapper) : ControllerBase
+public class EventItemController(
+    IEventItemRepository eventItemRepository,
+    IEventRepository eventRepository,
+    IMapper mapper
+) : ControllerBase
 {
     [HttpPost("event/{eventId}")]
     public async Task<IActionResult> Create(int eventId, [FromBody] UpsertEventItemRequest[] request)
     {
+        var @event = await eventRepository.GetFirst(eventId);
+
+        if (@event is null)
+            return NotFound(TerreiroResource.EVENT_NOT_FOUND_ID.InsertParams(eventId));
+
         var eventItems = request.Select(x => new EventItem(x.Name, x.Quantity, eventId));
 
         var rowsAffected = await eventItemRepository.Add(eventItems);
-        return rowsAffected is 0 ? UnprocessableEntity(TerreiroResource.DATA_ERROR) : Created();
+        return rowsAffected is 0 ?
+            UnprocessableEntity(TerreiroResource.DATA_ERROR) :
+            Created("", mapper.Map<EventItemDto[]>(eventItems));
     }
 
     [HttpDelete("{id}")]

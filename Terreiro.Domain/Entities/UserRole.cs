@@ -2,18 +2,10 @@
 
 namespace Terreiro.Domain.Entities;
 
-public class UserRole : Entity
+public class UserRole(int userId, int roleId) : Entity
 {
-    private UserRole() { }
-
-    public UserRole(int userId, int roleId)
-    {
-        UserId = userId;
-        RoleId = roleId;
-    }
-
-    public int UserId { get; }
-    public int RoleId { get; }
+    public int UserId { get; } = userId;
+    public int RoleId { get; } = roleId;
 
     public virtual User User { get; } = default!;
     public virtual Role Role { get; } = default!;

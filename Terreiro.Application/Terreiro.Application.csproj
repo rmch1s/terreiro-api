@@ -16,9 +16,9 @@
     <ProjectReference Include="..\Terreiro.Domain\Terreiro.Domain.csproj" />
   </ItemGroup>
 
-    <ItemGroup>
+    <!--<ItemGroup>
 	    <InternalsVisibleTo Include="Terreiro.Tests" />
-    </ItemGroup>
+    </ItemGroup>-->
 
   <ItemGroup>
     <Compile Update="Resources\TerreiroResource.Designer.cs">

@@ -4,8 +4,7 @@ using Terreiro.Application.Requests;
 using Terreiro.Application.Resources;
 
 namespace Terreiro.Application.Validators;
-
-internal class CreateEventRequestValidator : AbstractValidator<CreateEventRequest>
+public class CreateEventRequestValidator : AbstractValidator<CreateEventRequest>
 {
     public CreateEventRequestValidator()
     {
@@ -20,8 +19,11 @@ internal class CreateEventRequestValidator : AbstractValidator<CreateEventReques
                 .WithMessage(x => TerreiroResource.FIELD_BETWEEN_LENGTH.InsertParams(nameof(x.Description), 5, 300));
         });
 
-        RuleForEach(x => x.Items)
-            .SetValidator(new UpsertEventItemRequestValidator());
+        When(x => x.Items is not null, () =>
+        {
+            RuleForEach(x => x.Items)
+                .SetValidator(new UpsertEventItemRequestValidator());
+        });
 
         RuleFor(x => x.Period)
             .SetValidator(new PeriodValidator());

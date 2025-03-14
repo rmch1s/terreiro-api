@@ -2,20 +2,11 @@
 
 namespace Terreiro.Domain.Entities;
 
-public class EventItem : BaseEntity
+public class EventItem(string name, int quantity, int eventId) : BaseEntity
 {
-    private EventItem() { }
-
-    public EventItem(string name, int quantity, int eventId)
-    {
-        Name = name;
-        Quantity = quantity;
-        EventId = eventId;
-    }
-
-    public string Name { get; private set; } = string.Empty;
-    public int Quantity { get; private set; }
-    public int EventId { get; }
+    public string Name { get; private set; } = name;
+    public int Quantity { get; private set; } = quantity;
+    public int EventId { get; } = eventId;
 
     public virtual Event Event { get; } = default!;
     public virtual ICollection<User> Users { get; } = [];

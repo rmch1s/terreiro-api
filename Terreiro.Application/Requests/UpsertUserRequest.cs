@@ -2,4 +2,8 @@
 
 namespace Terreiro.Application.Requests;
 
-public record UpsertUserRequest(string Name, string CPF, Cellphone Cellphone);
+public record UpsertUserRequest(
+    string Name,
+    string CPF,
+    Cellphone Cellphone
+);

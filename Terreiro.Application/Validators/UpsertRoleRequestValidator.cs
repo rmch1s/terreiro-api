@@ -5,7 +5,7 @@ using Terreiro.Application.Resources;
 
 namespace Terreiro.Application.Validators;
 
-internal class UpsertRoleRequestValidator : AbstractValidator<UpsertRoleRequest>
+public class UpsertRoleRequestValidator : AbstractValidator<UpsertRoleRequest>
 {
     public UpsertRoleRequestValidator()
     {

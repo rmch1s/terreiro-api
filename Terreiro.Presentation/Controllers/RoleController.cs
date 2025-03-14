@@ -39,7 +39,9 @@ public class RoleController(IRoleRepository roleRepository, IMapper mapper) : Co
     {
         var role = new Role(request.Name, request.Description);
         var rowsAffected = await roleRepository.Add(role);
-        return rowsAffected is 0 ? UnprocessableEntity(TerreiroResource.DATA_ERROR) : Created();
+        return rowsAffected is 0 ?
+            UnprocessableEntity(TerreiroResource.DATA_ERROR) :
+            Created("", mapper.Map<RoleDto>(role));
     }
 
     [HttpDelete("{id}")]
