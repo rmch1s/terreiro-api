@@ -2,7 +2,7 @@
 using FluentAssertions;
 using Terreiro.Domain.Entities;
 using Terreiro.Domain.ValueObjects;
-using Terreiro.Tests.Fixtures;
+using Terreiro.Tests.Fixtures.Entities;
 
 namespace Terreiro.Tests.Entities;
 

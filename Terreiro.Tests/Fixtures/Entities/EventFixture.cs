@@ -2,7 +2,7 @@
 using Terreiro.Domain.Entities;
 using Terreiro.Domain.ValueObjects;
 
-namespace Terreiro.Tests.Fixtures;
+namespace Terreiro.Tests.Fixtures.Entities;
 
 public class EventFixture
 {

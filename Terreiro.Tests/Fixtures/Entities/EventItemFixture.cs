@@ -1,7 +1,7 @@
 ﻿using Bogus;
 using Terreiro.Domain.Entities;
 
-namespace Terreiro.Tests.Fixtures;
+namespace Terreiro.Tests.Fixtures.Entities;
 
 public class EventItemFixture
 {
