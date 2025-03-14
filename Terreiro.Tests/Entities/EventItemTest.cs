@@ -15,7 +15,7 @@ public class EventItemTest
     public void Constructor_GivenAllParameters_ThenSetPropertiesCorrectly()
     {
         //Arrange
-        var expectedName = _faker.Person.FirstName;
+        var expectedName = _faker.Random.String(5, 100);
         var expectedQuantity = _faker.Random.Int();
         var expectedEventId = _faker.Random.Int();
 

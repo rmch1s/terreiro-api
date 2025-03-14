@@ -16,18 +16,18 @@ public class EventTest
     public void Constructor_GivenAllParameters_ThenSetPropertiesCorrectly()
     {
         //Arrange
-        var expectedName = _faker.Person.FirstName;
+        var expectedName = _faker.Random.String(5, 100);
         var expectedPeriod = new Period(_faker.Date.Future(), _faker.Date.Future().OrNull(_faker));
-        var expetedItems = EventItemFixture.GenerateEventItems(1).ToArray();
-        var expectedDescription = _faker.Random.String().OrNull(_faker);
+        var expectedItems = EventItemFixture.GenerateEventItems(1).ToArray();
+        var expectedDescription = _faker.Random.String(5, 300).OrNull(_faker);
 
         // Act
-        var @event = new Event(expectedName, expectedPeriod, expetedItems, expectedDescription);
+        var @event = new Event(expectedName, expectedPeriod, expectedItems, expectedDescription);
 
         // Assert
         @event.Name.Should().Be(expectedName);
         @event.Period.Should().Be(expectedPeriod);
-        @event.Items.Should().Equal(expetedItems);
+        @event.Items.Should().Equal(expectedItems);
         @event.Description.Should().Be(expectedDescription);
         @event.CreatedAt.Should().BeCloseTo(DateTime.UtcNow, TimeSpan.FromSeconds(1));
     }

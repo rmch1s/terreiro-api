@@ -15,8 +15,8 @@ public class UpsertRoleRequestValidator : AbstractValidator<UpsertRoleRequest>
 
         When(x => x.Description is not null, () =>
         {
-            RuleFor(x => x.Description)
-                .Must(x => x.Length >= 5 && x.Length <= 100)
+            RuleFor(x => x.Description!)
+                .Must(x => x.Length >= 5 && x.Length <= 300)
                 .WithMessage(x => TerreiroResource.FIELD_BETWEEN_LENGTH.InsertParams(nameof(x.Description), 5, 300));
         });
     }

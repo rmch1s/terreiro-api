@@ -8,7 +8,7 @@ public class RoleFixture
     public static IEnumerable<Role> GenerateRoles(int quantity) =>
         new Faker<Role>()
             .CustomInstantiator(f => new(
-                f.Person.FirstName,
-                f.Random.String().OrNull(f))
+                f.Random.String(5, 100),
+                f.Random.String(5, 300).OrNull(f))
             ).Generate(quantity);
 }

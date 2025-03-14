@@ -35,8 +35,8 @@ public class RoleTest
         // Arrange
         var role = RoleFixture.GenerateRoles(1).First();
 
-        var expectedName = _faker.Person.FirstName;
-        var expectedDescription = _faker.Random.String().OrNull(_faker);
+        var expectedName = _faker.Random.String(5, 100);
+        var expectedDescription = _faker.Random.String(5, 300).OrNull(_faker);
 
         //Act
         role.Update(expectedName, expectedDescription);
