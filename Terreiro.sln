@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.12.35521.163 d17.12
+VisualStudioVersion = 17.12.35521.163
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Terreiro.Domain", "Terreiro.Domain\Terreiro.Domain.csproj", "{7C94625F-C9D3-425D-B951-A68D2EF2199F}"
 EndProject
@@ -24,6 +24,10 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{A0D04F55-B645-4C35-8A9A-E639F49819E5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Terreiro.Tests", "Terreiro.Tests\Terreiro.Tests.csproj", "{65374456-36A9-42FA-8A2B-A50BC8F73B85}"
+	ProjectSection(ProjectDependencies) = postProject
+		{7C94625F-C9D3-425D-B951-A68D2EF2199F} = {7C94625F-C9D3-425D-B951-A68D2EF2199F}
+		{952F80B4-64F6-481E-8079-4BC65F798E24} = {952F80B4-64F6-481E-8079-4BC65F798E24}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

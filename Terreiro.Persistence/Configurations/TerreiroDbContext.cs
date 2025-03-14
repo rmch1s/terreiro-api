@@ -2,7 +2,7 @@
 using Terreiro.Domain.Entities;
 using Terreiro.Persistence.Mappings;
 
-namespace Terreiro.Persistence.Data;
+namespace Terreiro.Persistence.Configurations;
 
 public class TerreiroDbContext(DbContextOptions<TerreiroDbContext> options) : DbContext(options)
 {

@@ -1,11 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 using Terreiro.Domain.Entities.Base;
-using Terreiro.Persistence.Data;
+using Terreiro.Persistence.Configurations;
 
 namespace Terreiro.Persistence.Repositories;
 
-public abstract class Repository<T>(TerreiroDbContext db) where T : Entity
+internal abstract class Repository<T>(TerreiroDbContext db) where T : Entity
 {
     protected readonly TerreiroDbContext db = db;
     protected readonly DbSet<T> dbSet = db.Set<T>();

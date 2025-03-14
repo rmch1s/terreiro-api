@@ -5,7 +5,7 @@ using Terreiro.Domain.ValueObjects;
 
 namespace Terreiro.Application.Validators;
 
-public class CellphoneValidator : AbstractValidator<Cellphone>
+internal class CellphoneValidator : AbstractValidator<Cellphone>
 {
     public CellphoneValidator()
     {

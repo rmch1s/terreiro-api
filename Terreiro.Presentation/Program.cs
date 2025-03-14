@@ -3,7 +3,8 @@ using FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
-using Terreiro.Persistence.Data;
+using Terreiro.Application.Configurations;
+using Terreiro.Persistence.Configurations;
 using Terreiro.Presentation.Configurations;
 using Terreiro.Presentation.Filter;
 using Terreiro.Presentation.Middlewares;
@@ -39,8 +40,12 @@ builder.Services.AddSwaggerGen(c =>
     });
 });
 
-builder.Services.AddPersistenceConfiguration(builder.Configuration);
-builder.Services.AddApplicationConfiguration();
+builder.Services.AddDbContext<TerreiroDbContext>(options =>
+    options.UseNpgsql(builder.Configuration.GetConnectionString("Default"))
+);
+
+builder.Services.AddPersistenceDependencyInjection(builder.Configuration);
+builder.Services.AddApplicationDependecyInjection();
 
 builder.Services.AddControllers(options =>
 {

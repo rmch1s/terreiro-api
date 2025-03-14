@@ -5,7 +5,7 @@ using Terreiro.Application.Resources;
 
 namespace Terreiro.Application.Validators;
 
-public class LoginRequestValidator : AbstractValidator<LoginRequest>
+internal class LoginRequestValidator : AbstractValidator<LoginRequest>
 {
     public LoginRequestValidator()
     {

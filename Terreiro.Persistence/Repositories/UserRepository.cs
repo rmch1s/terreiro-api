@@ -1,11 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Terreiro.Application.Repositories;
 using Terreiro.Domain.Entities;
-using Terreiro.Persistence.Data;
+using Terreiro.Persistence.Configurations;
 
 namespace Terreiro.Persistence.Repositories;
 
-public class UserRepository(TerreiroDbContext db) : Repository<User>(db), IUserRepository
+internal class UserRepository(TerreiroDbContext db) : Repository<User>(db), IUserRepository
 {
     public async Task<User?> GetByCpf(string cpf) =>
         await dbSet

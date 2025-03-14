@@ -1,26 +1,33 @@
 ﻿using FluentValidation;
 using Terreiro.Application.Helpers;
+using Terreiro.Application.Requests;
 using Terreiro.Application.Resources;
-using Terreiro.Domain.ValueObjects;
 
 namespace Terreiro.Application.Validators;
 
-internal class PeriodValidator : AbstractValidator<Period>
+internal class GetEventRequestValidator : AbstractValidator<GetEventRequest>
 {
-    public PeriodValidator()
+    public GetEventRequestValidator()
     {
-        RuleFor(x => x.StartDate)
+        When(x => x.StartDate.HasValue, () =>
+        {
+            RuleFor(x => x.StartDate)
             .NotEmpty()
             .WithMessage(x => TerreiroResource.FIELD_EMPTY.InsertParams(nameof(x.StartDate)));
+        });
 
         When(x => x.EndDate.HasValue, () =>
         {
             RuleFor(x => x.EndDate!.Value)
                 .NotEmpty()
-                .WithMessage(x => TerreiroResource.FIELD_EMPTY.InsertParams(nameof(x.EndDate)))
+                .WithMessage(x => TerreiroResource.FIELD_EMPTY.InsertParams(nameof(x.EndDate)));
+        });
+
+        When(x => x.StartDate.HasValue && x.EndDate.HasValue, () =>
+        {
+            RuleFor(x => x.EndDate)
                 .GreaterThan(x => x.StartDate)
                 .WithMessage(x => TerreiroResource.FIELD_GREATER_THAN.InsertParams(nameof(x.EndDate), nameof(x.StartDate)));
-
         });
     }
 }

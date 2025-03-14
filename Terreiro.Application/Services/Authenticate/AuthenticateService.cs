@@ -7,7 +7,7 @@ using Terreiro.Domain.Entities;
 
 namespace Terreiro.Application.Services.Authenticate;
 
-public class AuthenticateService(IConfiguration configuration) : IAuthenticateService
+internal class AuthenticateService(IConfiguration configuration) : IAuthenticateService
 {
     public string GenerateToken(User user)
     {

@@ -1,11 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Terreiro.Application.Repositories;
 using Terreiro.Domain.Entities;
-using Terreiro.Persistence.Data;
+using Terreiro.Persistence.Configurations;
 
 namespace Terreiro.Persistence.Repositories;
 
-public class RoleRepository(TerreiroDbContext db) : Repository<Role>(db), IRoleRepository
+internal class RoleRepository(TerreiroDbContext db) : Repository<Role>(db), IRoleRepository
 {
     public async Task<IEnumerable<Role>> Get(IEnumerable<int> ids) =>
         await dbSet

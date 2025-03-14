@@ -1,18 +1,14 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Terreiro.Application.Repositories;
-using Terreiro.Persistence.Data;
 using Terreiro.Persistence.Repositories;
 
-namespace Terreiro.Presentation.Configurations;
+namespace Terreiro.Persistence.Configurations;
 
-public static class PersistenceConfiguration
+public static class DependencyInjection
 {
-    public static void AddPersistenceConfiguration(this IServiceCollection services, IConfiguration configuration)
+    public static void AddPersistenceDependencyInjection(this IServiceCollection services, IConfiguration configuration)
     {
-        services.AddDbContext<TerreiroDbContext>(options =>
-            options.UseNpgsql(configuration.GetConnectionString("Default"))
-        );
-
         services.AddScoped<IUserRepository, UserRepository>();
         services.AddScoped<IRoleRepository, RoleRepository>();
         services.AddScoped<IEventRepository, EventRepository>();

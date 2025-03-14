@@ -5,7 +5,7 @@ using Terreiro.Domain.Execptions;
 
 namespace Terreiro.Application.Services.SetPin;
 
-public class SetPinService : ISetPinService
+internal class SetPinService : ISetPinService
 {
     public void SetPin(User user, string? oldPin, string newPin)
     {

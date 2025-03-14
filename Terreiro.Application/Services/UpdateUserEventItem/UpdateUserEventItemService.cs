@@ -3,7 +3,7 @@ using Terreiro.Domain.Entities;
 
 namespace Terreiro.Application.Services.UpdateUserEventItem;
 
-public class UpdateUserEventItemService(IUserEventItemRepository userEventItemRepository) : IUpdateUserEventItemService
+internal class UpdateUserEventItemService(IUserEventItemRepository userEventItemRepository) : IUpdateUserEventItemService
 {
     public async Task<(int, EventItem?)> Update(User user, EventItem eventItem)
     {

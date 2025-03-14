@@ -3,7 +3,7 @@ using Terreiro.Domain.Entities;
 
 namespace Terreiro.Application.Services.UpdateUserRole;
 
-public class UpdateUserRoleService(IUserRoleRepository userRoleRepository) : IUpdateUserRoleService
+internal class UpdateUserRoleService(IUserRoleRepository userRoleRepository) : IUpdateUserRoleService
 {
     public async Task<(int, Role?)> Update(User user, Role role)
     {

@@ -1,7 +1,3 @@
 ﻿namespace Terreiro.Application.Requests;
 
-public class UpsertEventItemRequest(string name, int quantity)
-{
-    public string Name { get; } = name;
-    public int Quantity { get; } = quantity;
-}
+public record UpsertEventItemRequest(string Name, int Quantity);

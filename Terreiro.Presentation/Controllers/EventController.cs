@@ -18,10 +18,9 @@ namespace Terreiro.Presentation.Controllers;
 public class EventController(IEventRepository eventRepository, IMapper mapper) : ControllerBase
 {
     [HttpGet]
-    public async Task<IActionResult> Get([FromQuery] DateTime? startDate, [FromQuery] DateTime? endDate)
+    public async Task<IActionResult> Get([FromQuery] GetEventRequest request)
     {
-        var user = HttpContext.User;
-        var events = await eventRepository.Get(startDate, endDate);
+        var events = await eventRepository.Get(request.StartDate, request.EndDate);
         return Ok(mapper.Map<EventDto[]>(events));
     }
 

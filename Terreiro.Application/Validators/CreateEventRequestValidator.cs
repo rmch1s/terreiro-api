@@ -5,7 +5,7 @@ using Terreiro.Application.Resources;
 
 namespace Terreiro.Application.Validators;
 
-public class CreateEventRequestValidator : AbstractValidator<CreateEventRequest>
+internal class CreateEventRequestValidator : AbstractValidator<CreateEventRequest>
 {
     public CreateEventRequestValidator()
     {
