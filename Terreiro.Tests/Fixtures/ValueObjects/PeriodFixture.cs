@@ -3,7 +3,7 @@ using Terreiro.Domain.ValueObjects;
 
 namespace Terreiro.Tests.Fixtures.ValueObjects;
 
-public class PeriodFixture
+internal class PeriodFixture
 {
     public static IEnumerable<Period> GeneratePeriods(int quantity) =>
         new Faker<Period>()

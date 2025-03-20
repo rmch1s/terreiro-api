@@ -4,18 +4,16 @@ using Terreiro.Domain.ValueObjects;
 
 namespace Terreiro.Tests.ValueObjects;
 
-public class PeriodTest
+public class PeriodTest : TestBase
 {
-    private readonly Faker _faker = new("pt_BR");
-
     [Fact]
     [Trait("Category", "Period")]
     [Trait("Method", "Constructor")]
     public void Constructor_GivenAllParameters_ThenSetPropertiesCorrectly()
     {
         //Arrange
-        var expectedStartDate = _faker.Date.Future();
-        var expectedEndDate = _faker.Date.Future().OrNull(_faker);
+        var expectedStartDate = faker.Date.Future();
+        var expectedEndDate = faker.Date.Future().OrNull(faker);
 
         // Act
         var period = new Period(expectedStartDate, expectedEndDate);

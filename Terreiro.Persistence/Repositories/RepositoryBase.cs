@@ -5,7 +5,7 @@ using Terreiro.Persistence.Configurations;
 
 namespace Terreiro.Persistence.Repositories;
 
-internal abstract class Repository<T>(TerreiroDbContext db) where T : Entity
+internal abstract class RepositoryBase<T>(TerreiroDbContext db) where T : Entity
 {
     protected readonly TerreiroDbContext db = db;
     protected readonly DbSet<T> dbSet = db.Set<T>();

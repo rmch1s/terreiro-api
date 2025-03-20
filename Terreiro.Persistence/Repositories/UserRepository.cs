@@ -5,7 +5,7 @@ using Terreiro.Persistence.Configurations;
 
 namespace Terreiro.Persistence.Repositories;
 
-internal class UserRepository(TerreiroDbContext db) : Repository<User>(db), IUserRepository
+internal class UserRepository(TerreiroDbContext db) : RepositoryBase<User>(db), IUserRepository
 {
     public async Task<User?> GetByCpf(string cpf) =>
         await dbSet

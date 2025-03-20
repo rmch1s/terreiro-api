@@ -2,7 +2,7 @@
 
 namespace Terreiro.Application.Repositories;
 
-public interface IUserRepository : IRepository<User>
+public interface IUserRepository : IRepositoryBase<User>
 {
     Task<int> UpdatePin(User user);
     Task<User?> GetByCpf(string cpf);

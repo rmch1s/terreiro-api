@@ -6,20 +6,18 @@ using Terreiro.Tests.Fixtures.Entities;
 
 namespace Terreiro.Tests.Entities;
 
-public class EventTest
+[Trait("Category", "Event")]
+public class EventTest : TestBase
 {
-    private readonly Faker _faker = new("pt_BR");
-
     [Fact]
-    [Trait("Category", "Event")]
     [Trait("Method", "Constructor")]
     public void Constructor_GivenAllParameters_ThenSetPropertiesCorrectly()
     {
         //Arrange
-        var expectedName = _faker.Random.String(5, 100);
-        var expectedPeriod = new Period(_faker.Date.Future(), _faker.Date.Future().OrNull(_faker));
+        var expectedName = faker.Random.String(5, 100);
+        var expectedPeriod = new Period(faker.Date.Future(), faker.Date.Future().OrNull(faker));
         var expectedItems = EventItemFixture.GenerateEventItems(1).ToArray();
-        var expectedDescription = _faker.Random.String(5, 300).OrNull(_faker);
+        var expectedDescription = faker.Random.String(5, 300).OrNull(faker);
 
         // Act
         var @event = new Event(expectedName, expectedPeriod, expectedItems, expectedDescription);
@@ -33,16 +31,15 @@ public class EventTest
     }
 
     [Fact]
-    [Trait("Category", "Event")]
     [Trait("Method", "Update")]
     public void Update_GivenAllParameters_ThenSetPropertiesCorrectly()
     {
         // Arrange
         var @event = EventFixture.GenerateEvents(1).First();
 
-        var expectedName = _faker.Person.FirstName;
-        var expectedPeriod = new Period(_faker.Date.Future(), _faker.Date.Future());
-        var expectedDescription = _faker.Random.String().OrNull(_faker);
+        var expectedName = faker.Person.FirstName;
+        var expectedPeriod = new Period(faker.Date.Future(), faker.Date.Future());
+        var expectedDescription = faker.Random.String().OrNull(faker);
 
         //Act
         @event.Update(expectedName, expectedPeriod, expectedDescription);
@@ -55,7 +52,6 @@ public class EventTest
     }
 
     [Fact]
-    [Trait("Category", "Event")]
     [Trait("Method", "SetDeletedAt")]
     public void SetDeletedAt_WhenIsCalled_SetDeletedAtCorrectly()
     {

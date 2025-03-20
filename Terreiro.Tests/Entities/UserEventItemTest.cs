@@ -1,21 +1,18 @@
-﻿using Bogus;
-using FluentAssertions;
+﻿using FluentAssertions;
 using Terreiro.Domain.Entities;
 
 namespace Terreiro.Tests.Entities;
 
-public class UserEventItemTest
+[Trait("Category", "UserEventItem")]
+public class UserEventItemTest : TestBase
 {
-    private readonly Faker _faker = new("pt_BR");
-
     [Fact]
-    [Trait("Category", "UserEventItem")]
     [Trait("Method", "Constructor")]
     public void Constructor_GivenAllParameters_ThenSetPropertiesCorrectly()
     {
         //Arrange
-        var expectedUserId = _faker.Random.Int();
-        var expectedEventItemId = _faker.Random.Int();
+        var expectedUserId = faker.Random.Int();
+        var expectedEventItemId = faker.Random.Int();
 
         // Act
         var user = new UserEventItem(expectedUserId, expectedEventItemId);

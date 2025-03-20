@@ -1,23 +1,20 @@
-﻿using Bogus;
-using FluentAssertions;
+﻿using FluentAssertions;
 using Terreiro.Domain.Entities;
 using Terreiro.Tests.Fixtures.Entities;
 using Terreiro.Tests.Fixtures.ValueObjects;
 
 namespace Terreiro.Tests.Entities;
 
-public class UserTest
+[Trait("Category", "User")]
+public class UserTest : TestBase
 {
-    private readonly Faker _faker = new("pt_BR");
-
     [Fact]
-    [Trait("Category", "User")]
     [Trait("Method", "Constructor")]
     public void Constructor_GivenAllParameters_ThenSetPropertiesCorrectly()
     {
         //Arrange
-        var expectedName = _faker.Random.String(5, 100);
-        var expectedCpf = _faker.Random.String(11);
+        var expectedName = faker.Random.String(5, 100);
+        var expectedCpf = faker.Random.String(11);
         var expectedCellphone = CellphoneFixture.GenerateCellphones(1).First();
 
         // Act
@@ -31,15 +28,14 @@ public class UserTest
     }
 
     [Fact]
-    [Trait("Category", "User")]
     [Trait("Method", "Update")]
     public void Update_GivenAllParameters_ThenSetPropertiesCorrectly()
     {
         // Arrange
         var user = UserFixture.GenerateUsers(1).First();
 
-        var expectedName = _faker.Random.String(5, 100);
-        var expectedCpf = _faker.Random.String(11);
+        var expectedName = faker.Random.String(5, 100);
+        var expectedCpf = faker.Random.String(11);
         var expectedCellphone = CellphoneFixture.GenerateCellphones(1).First();
 
         //Act
@@ -53,7 +49,6 @@ public class UserTest
     }
 
     [Fact]
-    [Trait("Category", "User")]
     [Trait("Method", "SetDeletedAt")]
     public void SetDeletedAt_WhenIsCalled_SetDeletedAtCorrectly()
     {

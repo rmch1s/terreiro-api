@@ -3,7 +3,7 @@ using Terreiro.Domain.ValueObjects;
 
 namespace Terreiro.Tests.Fixtures.ValueObjects;
 
-public class CellphoneFixture
+internal class CellphoneFixture
 {
     public static IEnumerable<Cellphone> GenerateCellphones(int quantity) =>
         new Faker<Cellphone>()

@@ -2,4 +2,4 @@
 
 namespace Terreiro.Application.Repositories;
 
-public interface IUserRoleRepository : IRepository<UserRole>;
+public interface IUserRoleRepository : IRepositoryBase<UserRole>;

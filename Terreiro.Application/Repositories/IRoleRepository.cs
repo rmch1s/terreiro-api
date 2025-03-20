@@ -2,7 +2,7 @@
 
 namespace Terreiro.Application.Repositories;
 
-public interface IRoleRepository : IRepository<Role>
+public interface IRoleRepository : IRepositoryBase<Role>
 {
     Task<IEnumerable<Role>> Get(IEnumerable<int> ids);
 }

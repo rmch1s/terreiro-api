@@ -4,4 +4,4 @@ using Terreiro.Persistence.Configurations;
 
 namespace Terreiro.Persistence.Repositories;
 
-internal class UserEventItemRepository(TerreiroDbContext db) : Repository<UserEventItem>(db), IUserEventItemRepository;
+internal class UserEventItemRepository(TerreiroDbContext db) : RepositoryBase<UserEventItem>(db), IUserEventItemRepository;

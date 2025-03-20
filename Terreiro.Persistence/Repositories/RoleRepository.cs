@@ -5,7 +5,7 @@ using Terreiro.Persistence.Configurations;
 
 namespace Terreiro.Persistence.Repositories;
 
-internal class RoleRepository(TerreiroDbContext db) : Repository<Role>(db), IRoleRepository
+internal class RoleRepository(TerreiroDbContext db) : RepositoryBase<Role>(db), IRoleRepository
 {
     public async Task<IEnumerable<Role>> Get(IEnumerable<int> ids) =>
         await dbSet

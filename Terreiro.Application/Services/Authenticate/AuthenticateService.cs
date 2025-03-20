@@ -29,7 +29,7 @@ internal class AuthenticateService(IConfiguration configuration) : IAuthenticate
 
         var credentials = new SigningCredentials(privateKey, SecurityAlgorithms.HmacSha256);
 
-        var expiration = DateTime.UtcNow.AddHours(Convert.ToDouble(configuration["Jwt:ExpirationHours"]));
+        var expiration = DateTime.UtcNow.AddHours(configuration.GetValue<int>("Jwt:ExpirationHours"));
 
         var token = new JwtSecurityToken(
             issuer: configuration["Jwt:Issuer"],

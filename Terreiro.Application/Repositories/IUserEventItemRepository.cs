@@ -2,4 +2,4 @@
 
 namespace Terreiro.Application.Repositories;
 
-public interface IUserEventItemRepository : IRepository<UserEventItem>;
+public interface IUserEventItemRepository : IRepositoryBase<UserEventItem>;

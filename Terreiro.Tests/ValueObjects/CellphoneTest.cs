@@ -1,21 +1,18 @@
-﻿using Bogus;
-using FluentAssertions;
+﻿using FluentAssertions;
 using Terreiro.Domain.ValueObjects;
 
 namespace Terreiro.Tests.ValueObjects;
 
-public class CellphoneTest
+public class CellphoneTest : TestBase
 {
-    private readonly Faker _faker = new("pt_BR");
-
     [Fact]
     [Trait("Category", "Cellphone")]
     [Trait("Method", "Constructor")]
     public void Constructor_GivenAllParameters_ThenSetPropertiesCorrectly()
     {
         //Arrange
-        var ddd = _faker.Random.UInt(2).ToString();
-        var number = _faker.Random.UInt(7, 8).ToString();
+        var ddd = faker.Random.UInt(2).ToString();
+        var number = faker.Random.UInt(7, 8).ToString();
 
         // Act
         var period = new Cellphone(ddd, number);
