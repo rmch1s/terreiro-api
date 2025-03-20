@@ -8,16 +8,8 @@ namespace Terreiro.Tests.Services;
 
 [Collection(nameof(UpsertUserEventItemServiceCollection))]
 [Trait("Category", "UpsertUserEventItemService")]
-public class UpsertUserEventItemServiceTest
+public class UpsertUserEventItemServiceTest(UpsertUserEventItemServiceFixture fixture) : ServiceTestBase<UpsertUserEventItemServiceFixture>(fixture)
 {
-    private readonly UpsertUserEventItemServiceFixture _fixture;
-
-    public UpsertUserEventItemServiceTest(UpsertUserEventItemServiceFixture fixture)
-    {
-        _fixture = fixture;
-        _fixture.GenerateService();
-    }
-
     [Fact]
     [Trait("Method", "Upsert")]
     public async Task Upsert_GiveUserWithEmptyEventItem_ThenAddEventItemSuccessfully()
@@ -26,10 +18,10 @@ public class UpsertUserEventItemServiceTest
         var user = UserFixture.GenerateUsers(1).First();
         var expectedEventItem = EventItemFixture.GenerateEventItems(1).First();
 
-        _fixture.UserEventItemRepository!.Setup(s => s.Add(It.IsAny<UserEventItem>())).ReturnsAsync(1);
+        fixture.UserEventItemRepository!.Setup(s => s.Add(It.IsAny<UserEventItem>())).ReturnsAsync(1);
 
         // Act
-        (_, var upsertedEventItem) = await _fixture.UpsertUserEventItemService!.Upsert(user, expectedEventItem);
+        (_, var upsertedEventItem) = await fixture.UpsertUserEventItemService!.Upsert(user, expectedEventItem);
 
         // Assert
         upsertedEventItem.Should().Be(expectedEventItem);
@@ -44,11 +36,10 @@ public class UpsertUserEventItemServiceTest
         var eventItem = EventItemFixture.GenerateEventItems(1).First();
 
         user.Setup(s => s.EventItems).Returns([eventItem]);
-        _fixture.UserEventItemRepository!.Setup(s => s.Add(It.IsAny<UserEventItem>())).ReturnsAsync(1);
+        fixture.UserEventItemRepository!.Setup(s => s.Add(It.IsAny<UserEventItem>())).ReturnsAsync(1);
 
         // Act
-        // Act
-        (_, var upsertedEventItem) = await _fixture.UpsertUserEventItemService!.Upsert(user.Object, eventItem);
+        (_, var upsertedEventItem) = await fixture.UpsertUserEventItemService!.Upsert(user.Object, eventItem);
 
         // Assert
         upsertedEventItem.Should().Be(null);

@@ -1,6 +1,5 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Moq;
-using Moq.AutoMock;
 using Terreiro.Application.Services.Authenticate;
 
 namespace Terreiro.Tests.Fixtures.Services;
@@ -8,15 +7,13 @@ namespace Terreiro.Tests.Fixtures.Services;
 [CollectionDefinition(nameof(AuthenticateServiceCollection))]
 public class AuthenticateServiceCollection : ICollectionFixture<AuthenticateServiceFixture>;
 
-public class AuthenticateServiceFixture : TestBase
+public class AuthenticateServiceFixture : ServiceFixtureBase
 {
     public Mock<IConfiguration>? Configuration;
     internal AuthenticateService? AuthenticateService;
 
-    public void GenerateService()
+    public override void GenerateService()
     {
-        var autoMocker = new AutoMocker();
-
         Configuration = autoMocker.GetMock<IConfiguration>();
         var sectionExpirationHoursMock = new Mock<IConfigurationSection>();
 

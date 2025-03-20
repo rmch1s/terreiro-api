@@ -6,16 +6,8 @@ namespace Terreiro.Tests.Services;
 
 [Collection(nameof(AuthenticateServiceCollection))]
 [Trait("Category", "AuthenticateService")]
-public class AuthenticateServiceTest
+public class AuthenticateServiceTest(AuthenticateServiceFixture fixture) : ServiceTestBase<AuthenticateServiceFixture>(fixture)
 {
-    private readonly AuthenticateServiceFixture _fixture;
-
-    public AuthenticateServiceTest(AuthenticateServiceFixture fixture)
-    {
-        _fixture = fixture;
-        _fixture.GenerateService();
-    }
-
     [Fact]
     [Trait("Method", "GenerateToken")]
     public void GenerateToken_GivenUser_ThenGenerateTokenSuccessfully()
@@ -27,7 +19,7 @@ public class AuthenticateServiceTest
         userMock.Setup(s => s.Roles).Returns([.. roles]);
 
         // Act
-        var token = _fixture.AuthenticateService!.GenerateToken(userMock.Object);
+        var token = fixture.AuthenticateService!.GenerateToken(userMock.Object);
 
         // Assert
         token.Should().NotBeNullOrEmpty();
