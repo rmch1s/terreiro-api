@@ -44,7 +44,7 @@ public class UpsertUserEventServiceTest
         var @event = EventFixture.GenerateEvents(1).First();
 
         user.Setup(s => s.Events).Returns([@event]);
-        _fixture.UserEventRepository!.Setup(s => s.Add(It.IsAny<UserEvent>())).ReturnsAsync(1);
+        _fixture.UserEventRepository!.Setup(s => s.Delete(It.IsAny<UserEvent>())).ReturnsAsync(1);
 
         // Act
         (_, var upsertedEvent) = await _fixture.UpdateUserEventService!.Upsert(user.Object, @event);
