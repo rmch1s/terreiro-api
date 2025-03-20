@@ -16,9 +16,10 @@ public class SetPinServiceTest
     {
         // Arrange
         var userMock = UserFixture.GenerateUserMock();
+        var setPinService = new SetPinService();
+
         userMock.Setup(s => s.SetPin(It.IsAny<string?>(), It.IsAny<string>()))
             .Throws<WrongPinException>();
-        var setPinService = new SetPinService();
 
         // Act
         var action = () => setPinService.SetPin(userMock.Object, It.IsAny<string?>(), It.IsAny<string>());

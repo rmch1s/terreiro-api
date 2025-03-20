@@ -23,6 +23,7 @@ public class AuthenticateServiceTest
         // Arrange
         var roles = RoleFixture.GenerateRoles(1);
         var userMock = UserFixture.GenerateUserMock();
+
         userMock.Setup(s => s.Roles).Returns([.. roles]);
 
         // Act

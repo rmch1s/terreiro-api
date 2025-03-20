@@ -8,9 +8,9 @@ using Terreiro.Application.Repositories;
 using Terreiro.Application.Requests;
 using Terreiro.Application.Resources;
 using Terreiro.Application.Services.SetPin;
-using Terreiro.Application.Services.UpdateUserEvent;
-using Terreiro.Application.Services.UpdateUserEventItem;
-using Terreiro.Application.Services.UpdateUserRole;
+using Terreiro.Application.Services.UpsertUserEvent;
+using Terreiro.Application.Services.UpsertUserEventItem;
+using Terreiro.Application.Services.UpsertUserRole;
 using Terreiro.Domain.Entities;
 using Terreiro.Presentation.Attributes;
 
@@ -25,9 +25,9 @@ public class UserController(
     IEventRepository eventRepository,
     IEventItemRepository eventItemRepository,
     ISetPinService setPinService,
-    IUpdateUserEventService updateUserEventService,
-    IUpdateUserEventItemService updateUserEventItemService,
-    IUpdateUserRoleService updateUserRoleService,
+    IUpsertUserEventService updateUserEventService,
+    IUpsertUserEventItemService updateUserEventItemService,
+    IUpsertUserRoleService updateUserRoleService,
     IMapper mapper
 ) : ControllerBase
 {
@@ -114,7 +114,7 @@ public class UserController(
         if (role is null)
             return NotFound(TerreiroResource.ROLE_NOT_FOUND_ID.InsertParams(roleId));
 
-        var (rowsAffected, updatedRole) = await updateUserRoleService.Update(user, role);
+        var (rowsAffected, updatedRole) = await updateUserRoleService.Upsert(user, role);
 
         return rowsAffected is 0 ?
             UnprocessableEntity(TerreiroResource.DATA_ERROR) :
@@ -133,7 +133,7 @@ public class UserController(
         if (@event is null)
             return NotFound(TerreiroResource.EVENT_NOT_FOUND_ID.InsertParams(id));
 
-        var (rowsAffected, updatedEvent) = await updateUserEventService.Update(user, @event);
+        var (rowsAffected, updatedEvent) = await updateUserEventService.Upsert(user, @event);
         return rowsAffected is 0 ?
             UnprocessableEntity(TerreiroResource.DATA_ERROR) :
             Ok(mapper.Map<EventDto?>(updatedEvent));
@@ -151,7 +151,7 @@ public class UserController(
         if (eventItem is null)
             return NotFound(TerreiroResource.EVENT_NOT_FOUND_ID.InsertParams(id));
 
-        var (rowsAffected, updatedEventItem) = await updateUserEventItemService.Update(user, eventItem);
+        var (rowsAffected, updatedEventItem) = await updateUserEventItemService.Upsert(user, eventItem);
         return rowsAffected is 0 ?
             UnprocessableEntity(TerreiroResource.DATA_ERROR) :
             Ok(mapper.Map<EventItemDto?>(updatedEventItem));

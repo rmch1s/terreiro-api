@@ -1,11 +1,11 @@
 ﻿using Terreiro.Application.Repositories;
 using Terreiro.Domain.Entities;
 
-namespace Terreiro.Application.Services.UpdateUserEvent;
+namespace Terreiro.Application.Services.UpsertUserEvent;
 
-internal class UpdateUserEventService(IUserEventRepository userEventRepository) : IUpdateUserEventService
+internal class UpsertUserEventService(IUserEventRepository userEventRepository) : IUpsertUserEventService
 {
-    public async Task<(int, Event?)> Update(User user, Event @event)
+    public async Task<(int, Event?)> Upsert(User user, Event @event)
     {
         var userEvent = new UserEvent(user.Id, @event.Id);
         var isAdding = !user.Events.Any(e => e.Id == @event.Id);

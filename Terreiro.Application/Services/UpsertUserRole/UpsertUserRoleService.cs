@@ -1,11 +1,11 @@
 ﻿using Terreiro.Application.Repositories;
 using Terreiro.Domain.Entities;
 
-namespace Terreiro.Application.Services.UpdateUserRole;
+namespace Terreiro.Application.Services.UpsertUserRole;
 
-internal class UpdateUserRoleService(IUserRoleRepository userRoleRepository) : IUpdateUserRoleService
+internal class UpsertUserRoleService(IUserRoleRepository userRoleRepository) : IUpsertUserRoleService
 {
-    public async Task<(int, Role?)> Update(User user, Role role)
+    public async Task<(int, Role?)> Upsert(User user, Role role)
     {
         var userRole = new UserRole(user.Id, role.Id);
         var isAdding = !user.Roles.Any(e => e.Id == role.Id);
