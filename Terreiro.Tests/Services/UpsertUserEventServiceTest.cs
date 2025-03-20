@@ -29,7 +29,7 @@ public class UpsertUserEventServiceTest
         _fixture.UserEventRepository!.Setup(s => s.Add(It.IsAny<UserEvent>())).ReturnsAsync(1);
 
         // Act
-        (_, var upsertedEvent) = await _fixture.UpdateUserEventService!.Upsert(user, expectedEvent);
+        (_, var upsertedEvent) = await _fixture.UpsertUserEventService!.Upsert(user, expectedEvent);
 
         // Assert
         upsertedEvent.Should().Be(expectedEvent);
@@ -47,7 +47,7 @@ public class UpsertUserEventServiceTest
         _fixture.UserEventRepository!.Setup(s => s.Delete(It.IsAny<UserEvent>())).ReturnsAsync(1);
 
         // Act
-        (_, var upsertedEvent) = await _fixture.UpdateUserEventService!.Upsert(user.Object, @event);
+        (_, var upsertedEvent) = await _fixture.UpsertUserEventService!.Upsert(user.Object, @event);
 
         // Assert
         upsertedEvent.Should().Be(null);

@@ -11,7 +11,7 @@ public class UpsertUserEventServiceCollection : ICollectionFixture<UpsertUserEve
 public class UpsertUserEventServiceFixture
 {
     public Mock<IUserEventRepository>? UserEventRepository;
-    internal UpsertUserEventService? UpdateUserEventService;
+    internal UpsertUserEventService? UpsertUserEventService;
 
     public void GenerateService()
     {
@@ -19,6 +19,6 @@ public class UpsertUserEventServiceFixture
 
         UserEventRepository = autoMocker.GetMock<IUserEventRepository>();
 
-        UpdateUserEventService = autoMocker.CreateInstance<UpsertUserEventService>();
+        UpsertUserEventService = autoMocker.CreateInstance<UpsertUserEventService>();
     }
 }
