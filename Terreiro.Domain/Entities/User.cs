@@ -17,7 +17,7 @@ public class User : BaseEntity
 
     public string Name { get; private set; } = string.Empty;
     public string CPF { get; private set; } = string.Empty;
-    public string? PIN { get; set; }
+    public string? PIN { get; private set; }
     public Cellphone Cellphone { get; private set; } = default!;
 
     public virtual ICollection<Role> Roles { get; private set; } = [];

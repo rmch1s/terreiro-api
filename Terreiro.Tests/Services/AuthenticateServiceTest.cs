@@ -28,7 +28,7 @@ public class AuthenticateServiceTest
         var userMock = new Mock<User>(user.Name, user.CPF, user.Cellphone) { CallBase = true };
         userMock.Setup(s => s.Roles).Returns([.. roles]);
 
-        //Act
+        // Act
         var token = _fixture.AuthenticateService!.GenerateToken(userMock.Object);
 
         // Assert
