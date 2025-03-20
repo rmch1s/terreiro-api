@@ -1,4 +1,5 @@
-﻿using FluentAssertions;
+﻿using Bogus;
+using FluentAssertions;
 using Moq;
 using Terreiro.Domain.Entities;
 using Terreiro.Domain.Execptions;
@@ -57,7 +58,7 @@ public class UserTest : TestBase
         // Arrange
         var user = UserFixture.GenerateUsers(1).First();
         var currentPin = faker.Random.Int(1111, 9999).ToString();
-        var oldPin = faker.Random.Int(1111, 9999).ToString();
+        var oldPin = faker.Random.Int(1111, 9999).OrNull(faker)?.ToString();
 
         user.SetPin(null, currentPin);
 

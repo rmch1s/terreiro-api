@@ -1,6 +1,4 @@
 ﻿using FluentAssertions;
-using Moq;
-using Terreiro.Domain.Entities;
 using Terreiro.Tests.Fixtures.Entities;
 using Terreiro.Tests.Fixtures.Services;
 
@@ -23,9 +21,8 @@ public class AuthenticateServiceTest
     public void GenerateToken_GivenUser_ThenGenerateTokenSuccessfully()
     {
         // Arrange
-        var user = UserFixture.GenerateUsers(1).First();
         var roles = RoleFixture.GenerateRoles(1);
-        var userMock = new Mock<User>(user.Name, user.CPF, user.Cellphone) { CallBase = true };
+        var userMock = UserFixture.GenerateUserMock();
         userMock.Setup(s => s.Roles).Returns([.. roles]);
 
         // Act

@@ -24,7 +24,7 @@ public class User : BaseEntity
     public virtual ICollection<EventItem> EventItems { get; private set; } = [];
     public virtual ICollection<Event> Events { get; private set; } = [];
 
-    public void SetPin(string? oldPin, string newPin)
+    public virtual void SetPin(string? oldPin, string newPin)
     {
         if (PIN != oldPin)
             throw new WrongPinException();
