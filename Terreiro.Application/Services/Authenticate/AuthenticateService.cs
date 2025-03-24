@@ -3,6 +3,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using Terreiro.Application.Exceptions;
 using Terreiro.Domain.Entities;
 
 namespace Terreiro.Application.Services.Authenticate;
@@ -11,6 +12,9 @@ internal class AuthenticateService(IConfiguration configuration) : IAuthenticate
 {
     public string GenerateToken(User user)
     {
+        if (user is null)
+            throw new NullEntityExecption();
+
         var claims = new List<Claim>()
         {
             new ("id", user.Id.ToString()),

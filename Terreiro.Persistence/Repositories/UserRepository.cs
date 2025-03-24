@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Terreiro.Application.Exceptions;
 using Terreiro.Application.Repositories;
 using Terreiro.Domain.Entities;
 using Terreiro.Persistence.Configurations;
@@ -15,6 +16,9 @@ internal class UserRepository(TerreiroDbContext db) : RepositoryBase<User>(db), 
 
     public async Task<int> UpdatePin(User user)
     {
+        if (user is null)
+            throw new NullEntityExecption();
+
         db.Attach(user);
 
         db.Entry(user).Property(p => p.PIN).IsModified = true;

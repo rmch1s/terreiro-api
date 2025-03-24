@@ -11,6 +11,9 @@ internal class SetPinService : ISetPinService
     {
         try
         {
+            if (user is null)
+                throw new NullEntityExecption();
+
             user.SetPin(oldPin, newPin);
         }
         catch (WrongPinException)

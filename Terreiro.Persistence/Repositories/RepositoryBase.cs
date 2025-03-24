@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
+using Terreiro.Application.Exceptions;
 using Terreiro.Domain.Entities.Base;
 using Terreiro.Persistence.Configurations;
 
@@ -39,6 +40,9 @@ internal abstract class RepositoryBase<T>(TerreiroDbContext db) where T : Entity
 
     public async Task<int> Add(T entity)
     {
+        if (entity is null)
+            throw new NullEntityExecption();
+
         await dbSet.AddAsync(entity);
 
         return await db.SaveChangesAsync();
@@ -46,6 +50,9 @@ internal abstract class RepositoryBase<T>(TerreiroDbContext db) where T : Entity
 
     public async Task<int> Add(IEnumerable<T> entities)
     {
+        if (entities?.Any(e => e is null) ?? true)
+            throw new NullEntityExecption();
+
         await dbSet.AddRangeAsync(entities);
 
         return await db.SaveChangesAsync();
@@ -53,6 +60,9 @@ internal abstract class RepositoryBase<T>(TerreiroDbContext db) where T : Entity
 
     public async Task<int> Update(T entity)
     {
+        if (entity is null)
+            throw new NullEntityExecption();
+
         db.Attach(entity);
 
         dbSet.Update(entity);
@@ -62,6 +72,9 @@ internal abstract class RepositoryBase<T>(TerreiroDbContext db) where T : Entity
 
     public async Task<int> Delete(T entity)
     {
+        if (entity is null)
+            throw new NullEntityExecption();
+
         db.Attach(entity);
 
         if (entity is BaseEntity baseEntity)
