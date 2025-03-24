@@ -1,5 +1,6 @@
 ﻿using FluentAssertions;
 using Moq;
+using Terreiro.Application.Exceptions;
 using Terreiro.Domain.Entities;
 using Terreiro.Tests.Fixtures.Entities;
 using Terreiro.Tests.Fixtures.Services;
@@ -8,11 +9,26 @@ namespace Terreiro.Tests.Services;
 
 [Collection(nameof(UpsertUserEventServiceCollection))]
 [Trait("Category", "UpdateUserEventService")]
-public class UpsertUserEventServiceTest(UpsertUserEventServiceFixture fixture) : ServiceTestBase<UpsertUserEventServiceFixture>(fixture)
+public class UpsertUserEventServiceTest(UpsertUserEventServiceFixture fixture) :
+    ServiceTestBase<UpsertUserEventServiceFixture>(fixture)
 {
+    [Theory]
+    [Trait("Method", "Upsert")]
+    [MemberData(nameof(GetInvalidUpsertInputs))]
+    public void Upsert_GivenNullUserOrNullEvent_ThenThrowException(User? user, Event? @event)
+    {
+        // Act
+#pragma warning disable CS8604 // Possible null reference argument.
+        var action = async () => await fixture.UpsertUserEventService!.Upsert(user, @event);
+#pragma warning restore CS8604 // Possible null reference argument.
+
+        // Assert
+        action.Should().ThrowAsync<NullEntityExecption>();
+    }
+
     [Fact]
     [Trait("Method", "Upsert")]
-    public async Task Upsert_GiveUserWithEmptyEvent_ThenAddEventSuccessfully()
+    public async Task Upsert_GivenUserWithEmptyEvent_ThenAddEventSuccessfully()
     {
         // Arrange
         var user = UserFixture.GenerateUsers(1).First();
@@ -29,7 +45,7 @@ public class UpsertUserEventServiceTest(UpsertUserEventServiceFixture fixture) :
 
     [Fact]
     [Trait("Method", "Upsert")]
-    public async Task Upsert_GiveUserWithEventPassedInParameter_ThenDeleteEventSuccessfully()
+    public async Task Upsert_GivenUserWithEventPassedInParameter_ThenDeleteEventSuccessfully()
     {
         // Arrange
         var user = UserFixture.GenerateUserMock();
@@ -43,5 +59,11 @@ public class UpsertUserEventServiceTest(UpsertUserEventServiceFixture fixture) :
 
         // Assert
         upsertedEvent.Should().Be(null);
+    }
+
+    public static IEnumerable<object?[]> GetInvalidUpsertInputs()
+    {
+        yield return [UserFixture.GenerateUsers(1).First(), null];
+        yield return [null, EventFixture.GenerateEvents(1).First()];
     }
 }

@@ -1,5 +1,6 @@
 ﻿using FluentAssertions;
 using Moq;
+using Terreiro.Application.Exceptions;
 using Terreiro.Domain.Entities;
 using Terreiro.Tests.Fixtures.Entities;
 using Terreiro.Tests.Fixtures.Services;
@@ -10,6 +11,20 @@ namespace Terreiro.Tests.Services;
 [Trait("Category", "UpsertUserRoleService")]
 public class UpsertUserRoleServiceTest(UpsertUserRoleServiceFixture fixture) : ServiceTestBase<UpsertUserRoleServiceFixture>(fixture)
 {
+    [Theory]
+    [Trait("Method", "Upsert")]
+    [MemberData(nameof(GetInvalidUpsertInputs))]
+    public void Upsert_GivenNullUserOrNullRole_ThenThrowException(User? user, Role? role)
+    {
+        // Act
+#pragma warning disable CS8604 // Possible null reference argument.
+        var action = async () => await fixture.UpsertUserRoleService!.Upsert(user, role);
+#pragma warning restore CS8604 // Possible null reference argument.
+
+        // Assert
+        action.Should().ThrowAsync<NullEntityExecption>();
+    }
+
     [Fact]
     [Trait("Method", "Upsert")]
     public async Task Upsert_GiveUserWithEmptyRole_ThenAddRoleSuccessfully()
@@ -43,5 +58,11 @@ public class UpsertUserRoleServiceTest(UpsertUserRoleServiceFixture fixture) : S
 
         // Assert
         upsertedRole.Should().Be(null);
+    }
+
+    public static IEnumerable<object?[]> GetInvalidUpsertInputs()
+    {
+        yield return [UserFixture.GenerateUsers(1).First(), null];
+        yield return [null, RoleFixture.GenerateRoles(1).First()];
     }
 }

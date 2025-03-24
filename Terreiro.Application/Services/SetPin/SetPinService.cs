@@ -9,11 +9,11 @@ internal class SetPinService : ISetPinService
 {
     public void SetPin(User user, string? oldPin, string newPin)
     {
+        if (user is null)
+            throw new NullEntityExecption();
+
         try
         {
-            if (user is null)
-                throw new NullEntityExecption();
-
             user.SetPin(oldPin, newPin);
         }
         catch (WrongPinException)

@@ -11,7 +11,7 @@ public class UserFixture
         new Faker<User>()
             .CustomInstantiator(f => new(
                 f.Random.String(5, 100),
-                f.Random.String(11),
+                f.Random.Long(11111111111, 99999999999).ToString(),
                 CellphoneFixture.GenerateCellphones(1).First())
             ).Generate(quantity);
 
