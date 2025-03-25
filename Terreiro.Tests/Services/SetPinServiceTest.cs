@@ -9,10 +9,10 @@ using Terreiro.Tests.Fixtures.Entities;
 namespace Terreiro.Tests.Services;
 
 [Trait("Category", "SetPinService")]
+[Trait("Method", "SetPin")]
 public class SetPinServiceTest
 {
     [Fact]
-    [Trait("Method", "SetPin")]
     public void SetPin_GivenNullUser_ThenThrowException()
     {
         // Arrange
@@ -29,7 +29,6 @@ public class SetPinServiceTest
     }
 
     [Fact]
-    [Trait("Method", "SetPin")]
     public void SetPin_GivenAllParametersWithWrongOldPin_ThenThrowException()
     {
         // Arrange

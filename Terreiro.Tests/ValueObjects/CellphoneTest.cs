@@ -3,11 +3,11 @@ using Terreiro.Domain.ValueObjects;
 
 namespace Terreiro.Tests.ValueObjects;
 
+[Trait("Category", "Cellphone")]
+[Trait("Method", "Constructor")]
 public class CellphoneTest : TestBase
 {
     [Fact]
-    [Trait("Category", "Cellphone")]
-    [Trait("Method", "Constructor")]
     public void Constructor_GivenAllParameters_ThenSetPropertiesCorrectly()
     {
         //Arrange

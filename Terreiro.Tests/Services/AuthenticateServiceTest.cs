@@ -8,10 +8,10 @@ namespace Terreiro.Tests.Services;
 
 [Collection(nameof(AuthenticateServiceCollection))]
 [Trait("Category", "AuthenticateService")]
+[Trait("Method", "GenerateToken")]
 public class AuthenticateServiceTest(AuthenticateServiceFixture fixture) : ServiceTestBase<AuthenticateServiceFixture>(fixture)
 {
     [Fact]
-    [Trait("Method", "GenerateToken")]
     public void GenerateToken_GivenNullUser_ThenThrowException()
     {
         // Arrange
@@ -27,7 +27,6 @@ public class AuthenticateServiceTest(AuthenticateServiceFixture fixture) : Servi
     }
 
     [Fact]
-    [Trait("Method", "GenerateToken")]
     public void GenerateToken_GivenUser_ThenGenerateTokenSuccessfully()
     {
         // Arrange

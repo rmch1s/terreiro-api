@@ -3,11 +3,11 @@ using Terreiro.Application.Exceptions;
 
 namespace Terreiro.Tests.Exceptions;
 
+[Trait("Category", "Role")]
+[Trait("Method", "Constructor")]
 public class BadRequestExceptionTest : TestBase
 {
     [Fact]
-    [Trait("Category", "Role")]
-    [Trait("Method", "Constructor")]
     public void Constructor_GivenMessage_ThenSetMessageCorrectlyToException()
     {
         // Arrange

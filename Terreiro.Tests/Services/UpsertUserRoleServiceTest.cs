@@ -9,10 +9,10 @@ namespace Terreiro.Tests.Services;
 
 [Collection(nameof(UpsertUserRoleServiceCollection))]
 [Trait("Category", "UpsertUserRoleService")]
+[Trait("Method", "Upsert")]
 public class UpsertUserRoleServiceTest(UpsertUserRoleServiceFixture fixture) : ServiceTestBase<UpsertUserRoleServiceFixture>(fixture)
 {
     [Theory]
-    [Trait("Method", "Upsert")]
     [MemberData(nameof(GetInvalidUpsertInputs))]
     public void Upsert_GivenNullUserOrNullRole_ThenThrowException(User? user, Role? role)
     {
@@ -26,7 +26,6 @@ public class UpsertUserRoleServiceTest(UpsertUserRoleServiceFixture fixture) : S
     }
 
     [Fact]
-    [Trait("Method", "Upsert")]
     public async Task Upsert_GiveUserWithEmptyRole_ThenAddRoleSuccessfully()
     {
         // Arrange
@@ -43,7 +42,6 @@ public class UpsertUserRoleServiceTest(UpsertUserRoleServiceFixture fixture) : S
     }
 
     [Fact]
-    [Trait("Method", "Upsert")]
     public async Task Upsert_GiveUserWithRolePassedInParameter_ThenDeleteRoleSuccessfully()
     {
         // Arrange

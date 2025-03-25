@@ -1,12 +1,10 @@
-﻿using Bogus;
-using Moq.AutoMock;
+﻿using Moq.AutoMock;
 
 namespace Terreiro.Tests.Fixtures.Services;
 
-public abstract class ServiceFixtureBase
+public abstract class ServiceFixtureBase : TestBase
 {
     protected readonly AutoMocker autoMocker = new AutoMocker();
-    protected readonly Faker faker = new("pt_BR");
 
     public abstract void GenerateService();
 }

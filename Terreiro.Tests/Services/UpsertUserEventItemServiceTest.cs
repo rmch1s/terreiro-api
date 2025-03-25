@@ -9,11 +9,11 @@ namespace Terreiro.Tests.Services;
 
 [Collection(nameof(UpsertUserEventItemServiceCollection))]
 [Trait("Category", "UpsertUserEventItemService")]
+[Trait("Method", "Upsert")]
 public class UpsertUserEventItemServiceTest(UpsertUserEventItemServiceFixture fixture) :
     ServiceTestBase<UpsertUserEventItemServiceFixture>(fixture)
 {
     [Theory]
-    [Trait("Method", "Upsert")]
     [MemberData(nameof(GetInvalidUpsertInputs))]
     public void Upsert_GivenNullUserOrNullEventItem_ThenThrowException(User? user, EventItem? eventItem)
     {
@@ -27,7 +27,6 @@ public class UpsertUserEventItemServiceTest(UpsertUserEventItemServiceFixture fi
     }
 
     [Fact]
-    [Trait("Method", "Upsert")]
     public async Task Upsert_GivenUserWithEmptyEventItem_ThenAddEventItemSuccessfully()
     {
         // Arrange
@@ -44,7 +43,6 @@ public class UpsertUserEventItemServiceTest(UpsertUserEventItemServiceFixture fi
     }
 
     [Fact]
-    [Trait("Method", "Upsert")]
     public async Task Upsert_GivenUserWithEventItemPassedInParameter_ThenDeleteEventItemSuccessfully()
     {
         // Arrange

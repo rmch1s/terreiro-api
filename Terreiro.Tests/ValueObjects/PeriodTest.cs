@@ -4,11 +4,11 @@ using Terreiro.Domain.ValueObjects;
 
 namespace Terreiro.Tests.ValueObjects;
 
+[Trait("Category", "Period")]
+[Trait("Method", "Constructor")]
 public class PeriodTest : TestBase
 {
     [Fact]
-    [Trait("Category", "Period")]
-    [Trait("Method", "Constructor")]
     public void Constructor_GivenAllParameters_ThenSetPropertiesCorrectly()
     {
         //Arrange
